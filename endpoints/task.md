@@ -2,26 +2,24 @@
 
 **This is not the final document and is subject to change**
 
-### `/task/create`
-This endpoint takes the following `POST` body:
+### `/task`
+This endpoint takes the following `PUT` body:
 ```ts
 {
-    isFinalTask : Boolean,
-    session : Guid,
-    task : String,
-    taskType : String,
-    necessaryPoints : Number,
-    subject : String,
-    module : String,
-    lecture : String,
-    difficulty : String,
-    solutions: Array<String>
+    session: Guid,
+    task: String,
+    taskType: String,
+    necessaryPoints: Number,
+    subject: String,
+    module: String,
+    lecture: String,
+    difficulty: String,
+    solutions: Array<String>,
     fake_solutions: Array<String>
 }
 ```
 
 #### Responses:
-
 ```ts
 {
     error: String // only present on response codes 40x
@@ -34,10 +32,10 @@ This endpoint takes the following `POST` body:
 This endpoint takes the following `POST` body:
 ```ts
 {
-    session : Guid,
-    subject : String,
-    module : String,
-    lecture : String,
+    session: Guid,
+    subject: String,
+    module: String,
+    lecture: String,
 }
 ```
 
@@ -47,15 +45,15 @@ This endpoint takes the following `POST` body:
 {
     tasks: [{
         task_id: Number,
-        task : String,
-        taskType : String,
-        necessaryPoints : Number,
-        subject : String,
-        module : String,
-        lecture : String,
-        difficulty : String,
-		author : Guid
-	}],
+        task: String,
+        taskType: String,
+        necessaryPoints: Number,
+        subject: String,
+        module: String,
+        lecture: String,
+        difficulty: String,
+        author: Guid
+    }],
     error: String // only present on response codes 40x
 }
 ```
@@ -64,12 +62,69 @@ The response will return a list of tasks in case the search was successful and a
 
 ---
 
+### `/task/check`
+
+This endpoint takes the following `POST` body:
+```ts
+{
+    session: Guid,
+    user_solution: Array<String>
+}
+```
+
+#### Responses: 
+
+```ts
+{
+    right: Boolean, // only present on response codes 20x
+    error: String // only present on response codes 40x
+}
+```
+
+
+---
+
+### `/task/getNext`
+
+This endpoint is used to get the next task, that is based on the last task, to continue with more tasks in that context. Eventually this will return a final task. 
+
+This endpoint takes the following `GET` body:
+
+```ts
+{
+    session: Guid,
+    last_task_id: Number
+}
+```
+
+#### Responses: 
+
+```ts
+{
+    new_task:
+    {
+        task_id: Number,
+        task: String,
+        taskType: String,
+        necessaryPoints: Number,
+        subject: String,
+        module: String,
+        lecture: String,
+        difficulty: String,
+        author: Guid
+    }
+    error: String // only present on response codes 40x
+}
+```
+
+---
+
 ### `/task/verify`
 This endpoint takes the following `POST` body:
 ```ts
 {
-    session : Guid,
-    taskId : Number
+    session: Guid,
+    taskId: Number
 }
 ```
 
@@ -84,10 +139,10 @@ This endpoint takes the following `POST` body:
 ---
 
 ### `/task/getPendingTasks`
-This endpoint takes the following `POST` body:
+This endpoint takes the following `GET` body:
 ```ts
 {
-    session : Guid
+    session: Guid
 }
 ```
 
@@ -99,51 +154,13 @@ This endpoint takes the following `POST` body:
 }
 ```
 
-
 ---
 
-
-### `/task/getNext`
-
-This endpoint is used to get the next task, that is based on the last task, to continue with more tasks in that context. Eventually this will return a final task. 
-
-This endpoint takes the following `POST` body:
-
+### `/task`
+This endpoint takes the following `GET` body:
 ```ts
 {
-    session : Guid,
-	last_task_id: Number
-}
-```
-
-#### Responses: 
-
-```ts
-{
-    new_task :
-    {
-        task_id: Number,
-        isFinalTask : Boolean,
-        task : String,
-        taskType : String,
-        necessaryPoints : Number,
-        subject : String,
-        module : String,
-        lecture : String,
-        difficulty : String,
-		author : Guid
-	}
-    error: String // only present on response codes 40x
-}
-```
-
----
-
-### `/task/list`
-This endpoint takes the following `POST` body:
-```ts
-{
-    session : Guid
+    session: Guid
 }
 ```
 This will return the list of tasks a user created.
@@ -155,15 +172,18 @@ This will return the list of tasks a user created.
     tasks: Array<{
         task_id: Number,
         rating: Number,
-        isFinalTask : Boolean,
-        task : String,
-        taskType : String,
-        necessaryPoints : Number,
-        subject : String,
-        module : String,
-        lecture : String,
-        difficulty : String,
+        task: String,
+        taskType: String,
+        necessaryPoints: Number,
+        subject: String,
+        module: String,
+        lecture: String,
+        difficulty: String,
     }>
     error: String // only present on response codes 40x
 }
 ```
+
+
+___
+###### [Back](README.md)
