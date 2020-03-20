@@ -17,10 +17,9 @@ This endpoint takes the following  `PUT` request:
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-This response will return `null` in case the creation of a ticket was successful and a `String` in case a [Error](errors.md) ocurred.
 
 ---
 ### `/ticket/delete`
@@ -37,10 +36,9 @@ This endpoint takes the following `DELETE` request
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-The response will return `null` in case the  deletion was successful and a `String` in case a [Error](errors.md) ocurred.
 
 ---
 ### `/ticket/list`
@@ -62,10 +60,10 @@ This endpoint takes the following  `POST` request:
         sender: Guid,
 		title: String,
 		body: String
-	}]|null
+    }],
+    error: String // only present on response codes 40x
 }
 ```
-This response will return `null` in case no ticket to process exists.
 
 ---
 
@@ -86,7 +84,6 @@ This endpoint takes the following `PUT` request:
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-The response will return `null` in case the edit was successful and a `String` in case a [Error](errors.md) ocurred.

@@ -8,8 +8,9 @@ This endpoint takes the following `POST` body:
 {
     email: String,
     password: String,
-    name: String,
-    teacher_token: String|null
+    first_name: String,
+    last_name: String,
+    teacher_token: String
 }
 ```
 *Notice that Passwords should be stored by being hashed with [BCrypt](https://en.wikipedia.org/wiki/Bcrypt).*
@@ -17,7 +18,7 @@ This endpoint takes the following `POST` body:
 #### Responses:
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
 The response will return `null` in case the registration was successful and a `String` in case a [Error](errors.md) ocurred.
@@ -41,7 +42,7 @@ This endpoint takes the following `PATCH` arguments:
 #### Responses:
 ```ts
 {
-    error: String|null,
+    error: String, // only present on response codes 40x
     session: Guid|null
 }
 ```
@@ -63,7 +64,7 @@ This endpoint takes the following `POST` body:
 #### Responses:
 ```ts
 {
-    error: String|null,
+    error: String, // only present on response codes 40x
     session: Guid|null
 }
 ```
@@ -85,7 +86,7 @@ otherwise information of the requested `user` is provided, if the session owner 
 #### Responses:
 ```ts
 {
-    error: String|null,
+    error: String, // only present on response codes 40x
     teacher: Boolean,
     admin: Boolean,
     privileged_student: Boolean,
@@ -116,7 +117,7 @@ A user can NEVER alter their own `report_spammer`!
 #### Responses:
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
 If `error` is set to `null`, the operation was successful.

@@ -14,7 +14,9 @@ This endpoint takes the following `POST` body:
     subject : String,
     module : String,
     lecture : String,
-    difficulty : String
+    difficulty : String,
+    solutions: Array<String>
+    fake_solutions: Array<String>
 }
 ```
 
@@ -22,10 +24,9 @@ This endpoint takes the following `POST` body:
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-The response will return `null` in case the task creation was successful and a `String` in case a [Error](errors.md) ocurred.
 
 ---
 
@@ -45,6 +46,7 @@ This endpoint takes the following `POST` body:
 ```ts
 {
     tasks: [{
+        task_id: Number,
         task : String,
         taskType : String,
         necessaryPoints : Number,
@@ -54,13 +56,11 @@ This endpoint takes the following `POST` body:
         difficulty : String,
 		author : Guid
 	}],
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
 
-If `error` is set to `null`, the search was successful.
 The response will return a list of tasks in case the search was successful and a error `String` in case a [Error](errors.md) ocurred.
-
 
 ---
 
@@ -77,11 +77,9 @@ This endpoint takes the following `POST` body:
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-
-The response will return `null` in case the verification was successful and a `String` in case a [Error](errors.md) ocurred.
 
 ---
 
@@ -97,11 +95,9 @@ This endpoint takes the following `POST` body:
 
 ```ts
 {
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
-
-The response will return `null` in case the request was successful and a `String` in case a [Error](errors.md) ocurred.
 
 
 ---
@@ -126,6 +122,7 @@ This endpoint takes the following `POST` body:
 {
     new_task :
     {
+        task_id: Number,
         isFinalTask : Boolean,
         task : String,
         taskType : String,
@@ -136,8 +133,37 @@ This endpoint takes the following `POST` body:
         difficulty : String,
 		author : Guid
 	}
-    error: String|null
+    error: String // only present on response codes 40x
 }
 ```
 
-The response will return `null` in case the request was successful and a `String` in case a [Error](errors.md) ocurred.
+---
+
+### `/task/list`
+This endpoint takes the following `POST` body:
+```ts
+{
+    session : Guid
+}
+```
+This will return the list of tasks a user created.
+
+#### Responses:
+
+```ts
+{
+    tasks: Array<{
+        task_id: Number,
+        rating: Number,
+        isFinalTask : Boolean,
+        task : String,
+        taskType : String,
+        necessaryPoints : Number,
+        subject : String,
+        module : String,
+        lecture : String,
+        difficulty : String,
+    }>
+    error: String // only present on response codes 40x
+}
+```
