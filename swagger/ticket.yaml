@@ -8,6 +8,12 @@ paths:
       security: 
         - JWT: [write]
         - ServiceToken: [write]
+      parameters:
+      - name: X-Session
+        in: header
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -43,6 +49,11 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: ticket_id
           in: path
           required: true
@@ -70,6 +81,12 @@ paths:
       security:
         - JWT: [read]
         - ServiceToken: [write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -123,6 +140,11 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: ticket_id
           in: path
           required: true

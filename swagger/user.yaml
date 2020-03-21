@@ -15,6 +15,13 @@ paths:
       operationId: create_user
       security: 
       - JWT : [write]
+      - ServiceToken: [write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -60,8 +67,15 @@ paths:
       summary: Set user info
       description: The specified user if not null (then the owner of the session) will have their flags altered, if the owner of the session has the right permission. A user can NEVER alter their own report_spammer!
       operationId: set_user
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       security: 
       - JWT : [write]
+      - ServiceToken: [write]
       requestBody:
         content:
           application/json:
@@ -117,8 +131,15 @@ paths:
       summary: Gets user info. 
       description: If **user** is set to *null* information about the owner of the Session is returned, otherwise information of the requested **user** is provided, if the session owner has the right permission to request them.
       operationId: get_user
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       security: 
       - JWT : [read]
+      - ServiceToken: [write]
       requestBody:
         content:
           application/json:
@@ -174,6 +195,12 @@ paths:
                     type: string            
   /user/verify:
     patch:
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       tags:
         - user
       summary: Verifies a session token
@@ -224,6 +251,13 @@ paths:
       operationId: verify_session
       security: 
       - JWT : [read]
+      - ServiceToken: [write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -256,12 +290,19 @@ paths:
 
   /user/login:
     post:
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       tags:
         - user
       summary: Used to login a user
       operationId: login
       security: 
       - JWT : [write]
+      - ServiceToken: [write]
       requestBody:
         content:
           application/json:
@@ -306,3 +347,7 @@ components:
     JWT:
       type: http
       scheme: bearer
+    ServiceToken:
+      type: http
+      scheme: bearer
+      bearerFormat: randomstring

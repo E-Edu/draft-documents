@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Task Microservice
+  title: Task Microservice WIP
   version: v1
 paths:
   /task:
@@ -9,6 +9,13 @@ paths:
       operationId: createTask
       security: 
       - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -38,7 +45,13 @@ paths:
       operationId: searchTask
       security: 
       - JWT: [read]
-      parameters: 
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: subject
           in : query
           required : true
@@ -119,7 +132,13 @@ paths:
       operationId: getTask
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -181,7 +200,13 @@ paths:
       operationId: verifyTask
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -222,7 +247,13 @@ paths:
       operationId: getNext
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: last_task_id
           in: path
           required: true
@@ -282,6 +313,13 @@ paths:
       operationId: getTasks
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
@@ -337,7 +375,13 @@ paths:
       operationId: getMultipleChoiceSolutions
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -386,6 +430,13 @@ paths:
       operationId: checkMultipleChoiceSolutions
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -430,7 +481,13 @@ paths:
       operationId: getFreestyleSolution
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -470,6 +527,13 @@ paths:
       operationId: checkFreestyleSolution
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -512,7 +576,13 @@ paths:
       operationId: getEquationsSolution
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -552,6 +622,13 @@ paths:
       operationId: checkEquationSolution
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -594,7 +671,13 @@ paths:
       operationId: getWordsaladSolution
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -641,6 +724,13 @@ paths:
       operationId: checkWordsaladSolution
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -684,7 +774,13 @@ paths:
       operationId: getImageSolution
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -724,7 +820,13 @@ paths:
       operationId: checkImageSolution
       security:
       - JWT: [write]
-                  
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
@@ -757,7 +859,13 @@ paths:
       operationId: getTopicConnectionSolution
       security:  
       - JWT: [read]
+      - ServiceToken : [read, write]
       parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
         - name: task_id
           in: path
           required: true
@@ -797,6 +905,7 @@ paths:
       operationId: checkTopicConnectionSolution
       security:
       - JWT: [write]
+      - ServiceToken : [read, write]
                   
       responses:
         '200':
@@ -828,11 +937,10 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    tasks:
+    ServiceToken:
+      type: http
+      scheme: bearer
+      bearerFormat: ServiceToken
                       type: array
                       items:
                         type: object
@@ -873,10 +981,13 @@ components:
                     type: string
                     
 
-
 components:
   securitySchemes:
     JWT:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    ServiceToken:
+      type: http
+      scheme: bearer
+      bearerFormat: randomstring
