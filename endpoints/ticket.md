@@ -2,8 +2,8 @@
 
 **This is not the final document and is subject to change**
 
-### `/ticket/create`
-This endpoint takes the following  `PUT` request:
+### `/ticket`
+This endpoint takes the following  `POST` request:
 ```ts
 {
     session: Guid,
@@ -79,7 +79,7 @@ This endpoint takes the following `PUT` request:
     session: Guid,
     ticket_id: Guid,
     comment: String,
-    is_Troll: Boolean
+    is_troll: Boolean
 }
 ```
 
