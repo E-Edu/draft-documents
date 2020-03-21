@@ -8,8 +8,7 @@ paths:
       summary: Creates a new task
       operationId: createTask
       security: 
-      - BearerAuth: []
-      - ApiKeyAuth: []
+      - JWT: [write]
       requestBody:
         content:
           application/json:
@@ -33,33 +32,63 @@ paths:
       responses:
         '200':
           description: Ok
+          
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
 
     get:
       summary: Gets all tasks created by the user
       operationId: getTasks
       security:  
-      - BearerAuth: []
-      - ApiKeyAuth: []
-      parameters:
-        - name: taskId
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
+      - JWT: [read]
       responses:
         '200':
           description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
 
   /task/{taskId}:
     get:
       summary: Gets a task
       operationId: getTask
       security:  
-      - BearerAuth: []
-      - ApiKeyAuth: []
+      - JWT: [read]
       parameters:
         - name: taskId
           in: path
@@ -72,23 +101,114 @@ paths:
       responses:
         '200':
           description: Ok
+          
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /task/search:
+    get:
+      summary: Gets all tasks based on parameters 
+      operationId: searchTask
+      security: 
+      - JWT: [read]
+      parameters: 
+        - name: subject
+          in : query
+          required : true
+          description: Subject
+          schema :
+            type: string
+            format: string
+            minimum: 0
+        - name: module
+          in : query
+          required : true
+          description: Module
+          schema :
+            type: string
+            format: string
+            minimum: 0
+        - name: lecture
+          in : query
+          required : false
+          description: Lecture
+          schema :
+            type: string
+            format: string
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        task_id:
+                          type: integer
+                        task:
+                          type: string
+                        taskType:
+                          type: string
+                        necessaryPoints:
+                          type: integer
+                        subject:
+                          type: string
+                        lecture:
+                          type: string
+                        difficulty:
+                          type: string
+                        author:
+                          type: string
+                          
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+
 
 components:
   securitySchemes:
-    BearerAuth:
+    JWT:
       type: http
       scheme: bearer
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: "null"
-          tokenUrl: "null"
-          scopes:
-            read: Grants read access
-            write: Grants write access
-            admin: Grants access to admin operations
+      bearerFormat: JWT

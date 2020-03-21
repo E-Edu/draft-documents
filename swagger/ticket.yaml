@@ -1,54 +1,73 @@
 openapi: '3.0.2'
 info:
-  title: TicketAPI
+  title: Ticket Microservice
   version: '0.1'
 paths:
-  /ticket/create:
-    put:
+  /ticket:
+    post:
+      security: 
+        - JWT: [write]
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                session:
-                  type: string
                 task_id:
                   type: string
+                  format: guid
                 title:
                   type: string
                 body:
                   type: string
-                ticet_type:
+                ticket_type:
                   type: string
     
       responses:
         '200':
           description: OK
-        '400':
-          description: Body contains error specified in error.md
+        '4XX':
+          description: Returns an error, see errors.md
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
   
-  /ticket/delete:
+  /ticket/delete/{ticket_id}:
     delete:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                session:
-                  type: string
-                ticket_id:
-                  type: string
-
+      security:
+        - JWT: [write]
+      parameters:
+        - name: ticket_id
+          in: path
+          required: true
+          description: The ID corresponding to the ticket
+          schema:
+            type: string
+            format: guid
+            minimum: 0
       responses:
         '200':
           description: OK
-        '400':
-          description: Body contains error specified in error.md
+        '4XX':
+          description: Returns an error, see errors.md
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+    
   
   /ticket/list:
     post:
+      security:
+        - JWT: [read]
+      
       requestBody:
         content:
           application/json:
@@ -57,10 +76,86 @@ paths:
               properties:
                 session: 
                   type: string
+                  format: guid
+
+      responses:
+        '200':
+          description: Body contains an array of tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticket_id:
+                      type: string
+                      format: guid
+                    task_id:
+                      type: string
+                      format: guid
+                    sender:
+                      type: string
+                    title:
+                      type: string
+                    body:
+                      type: string
+                    ticket_type:
+                      type: string
+
                   
+        '4XX':
+          description: Returns an error, see errors.md
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+    
+  
+  /ticket/edit/{ticket_id}:
+    put:
+      security:
+        - JWT: [write]
+      parameters:
+        - name: ticket_id
+          in: path
+          required: true
+          description: The ID corresponding to the ticket
+          schema:  
+            type: string
+            format: guid
+            minimum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                is_troll:
+                  type: boolean
+
       responses:
         '200':
           description: OK
-        '400':
-          description: Body contains error specified in error.md
-      
+        '4XX':
+          description: Returns an error, see errors.md
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+    
+
+components:
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -2,15 +2,19 @@ openapi: 3.0.1
 info:
   title: User Microservice
   version: v1
+tags:
+- name: user
+  description: User Microservice
 paths:
   /user:
-    put:
+    post:
+      tags:
+        - user
       summary: Creates a new user
-      operationId: createUser
+      description: Notice that Passwords should be stored by being hashed with BCrypt.
+      operationId: create_user
       security: 
-      - BearerAuth: []
-      - ApiKeyAuth: []
-      - OAuth2: [write]
+      - JWT : [write]
       requestBody:
         content:
           application/json:
@@ -27,68 +31,242 @@ paths:
                   type: string
                 teacher_token:
                   type: string
+                  description: If there is no teacher token it will send a empty string
       responses:
-        '200':
-          description: Ok
-        '400':
-
-
-    get:
-      summary: Gets all tasks created by the user
-      operationId: getTasks
-      security:  
-      - BearerAuth: []
-      - ApiKeyAuth: []
-      parameters:
-        - name: taskId
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
+        200:
+          description: After processing this request a email will be dispatched to the users email address, containing a link for verifying their account structured in the following way **https://DOMAIN.TLD/verify?token=$TOKEN**. In case the teacher token isn't *null* and valid the teacher is instantly verified and marked as teacher.
+        400:
+          description: Returns *USER_ALREADY_REGISTERED* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string  
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+    
+    put:
+      tags:
+        - user
+      summary: Set user info
+      description: The specified user if not null (then the owner of the session) will have their flags altered, if the owner of the session has the right permission. A user can NEVER alter their own report_spammer!
+      operationId: set_user
+      security: 
+      - JWT : [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: string
+                user:
+                  type: string
+                teacher:
+                  type: boolean
+                admin:
+                  type: boolean
+                priviliged_student:
+                  type: boolean
+                report_spammer:
+                  type: boolean
       responses:
-        '200':
+        200:
           description: Ok
-
-  /task/{taskId}:
-    get:
-      summary: Gets a task
-      operationId: getTask
-      security:  
-      - BearerAuth: []
-      - ApiKeyAuth: []
-      parameters:
-        - name: taskId
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
+        400:
+          description: Returns *INVALID_SESSION* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+        401:
+          description: Returns *INVALID_PERMISSION* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string              
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string           
+  /user/info:
+    post:
+      tags:
+        - user
+      summary: Gets user info. 
+      description: If **user** is set to *null* information about the owner of the Session is returned, otherwise information of the requested **user** is provided, if the session owner has the right permission to request them.
+      operationId: get_user
+      security: 
+      - JWT : [read]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: string
+                user:
+                  type: string
       responses:
-        '200':
+        200:
+          description: The response will return privilege flags of the requested User in case the verification was successful and a error *String* in case a **Error** ocurred. **report_spammer** will always return 0 unless the session owner has the correct rights.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  teacher: 
+                    type: boolean
+                  admin: 
+                    type: boolean
+                  priviliged_student: 
+                    type: boolean
+                  report_spammer: 
+                    type: integer
+        400:
+          description: Returns *INVALID_SESSION* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string 
+        401:
+          description: Returns *INVALID_PERMISSION* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string            
+  /user/verify:
+    patch:
+      tags:
+        - user
+      summary: Verifies a session token
+      operationId: verify
+      security: 
+      - JWT : [read]
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        200:
           description: Ok
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  session: 
+                    type: string
+        401:
+          description: Returns *INVALID_TOKEN* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string            
+
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Used to login a user
+      operationId: login
+      security: 
+      - JWT : [write]
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  session: 
+                    type: string
+        400:
+          description: Returns *INVALID_LOGIN* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string            
           
-
 components:
   securitySchemes:
-    BearerAuth:
+    JWT:
       type: http
       scheme: bearer
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: "null"
-          tokenUrl: "null"
-          scopes:
-            read: Grants read access
-            write: Grants write access
-            admin: Grants access to admin operations
+      bearerFormat: JWT
