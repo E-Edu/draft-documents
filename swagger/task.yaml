@@ -445,7 +445,7 @@ paths:
 
 
   /solution/mutiple_choice/check:
-    put:
+    post:
       summary: Check multiple choice soulutions
       operationId: checkMultipleChoiceSolutions
       security:
@@ -542,7 +542,7 @@ paths:
 
 
   /solution/freestyle/check:
-    put:
+    post:
       summary: Check freestyle soulution
       operationId: checkFreestyleSolution
       security:
@@ -637,7 +637,7 @@ paths:
 
 
   /solution/equations/check:
-    put:
+    post:
       summary: Check equations soulution
       operationId: checkEquationSolution
       security:
@@ -739,7 +739,7 @@ paths:
 
 
   /solution/wordsalad/check:
-    put:
+    post:
       summary: Check wordsalad soulution
       operationId: checkWordsaladSolution
       security:
@@ -790,7 +790,7 @@ paths:
 
   /solution/image/{task_id}:
     get:
-      summary: Get all image soulution from task id WIP
+      summary: Get all image soulution from task id
       operationId: getImageSolution
       security:  
       - JWT: [read]
@@ -835,9 +835,8 @@ paths:
                     
                     
   /solution/image/check:
-    put:
-      summary: Check image soulution WIP
-      operationId: checkImageSolution
+    post:
+      summary: Check image soulution
       security:
       - JWT: [write]
       - ServiceToken : [read, write]
@@ -847,6 +846,17 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_solution:
+                  type: string
+                  example:
+                    LINK_TO_IMAGE
+      
       responses:
         '200':
           description: Ok
@@ -875,7 +885,7 @@ paths:
 
   /solution/topic_connection/{task_id}:
     get:
-      summary: Get all topic connection soulution from task id WIP
+      summary: Get all topic connection soulution from task id
       operationId: getTopicConnectionSolution
       security:  
       - JWT: [read]
@@ -897,6 +907,19 @@ paths:
       responses:
         '200':
           description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  solutuions :
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: string
+                      example:
+                        Connection Point a: Connection Point b
         
         '4XX':
           description: User Error
@@ -920,8 +943,8 @@ paths:
                     
                     
   /solution/topic_connection/check:
-    put:
-      summary: check topic connection soulution WIP
+    post:
+      summary: check topic connection soulution
       operationId: checkTopicConnectionSolution
       security:
       - JWT: [write]
@@ -932,6 +955,20 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  user_solutuions :
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: string
+                      example:
+                        Connection Point a: Connection Point b
       responses:
         '200':
           description: Ok
