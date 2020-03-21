@@ -11,4 +11,8 @@
 ### Swagger Documentation
 - [User](swagger/user.yaml)
 - [Task](swagger/task.yaml) 
+<<<<<<< HEAD
 - [Ticket](swagger/ticket.yaml)
+=======
+- [Ticket](swagger/ticket.yaml)
+>>>>>>> a77d76ef0ff66b9ce49cbde0104c5e758737c6be

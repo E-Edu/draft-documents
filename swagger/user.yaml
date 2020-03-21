@@ -215,7 +215,44 @@ paths:
                 type: object
                 properties: 
                   error: 
-                    type: string            
+                    type: string
+  /user/verify_session:
+    post:
+      tags:
+        - user
+      summary: Verifies a session token
+      operationId: verify_session
+      security: 
+      - JWT : [read]
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                session:
+                  type: string
+      responses:
+        200:
+          description: Ok
+        401:
+          description: Returns *INVALID_SESSION* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+        503:
+          description: Returns *DATABASE_ERROR* as error string
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string    
 
   /user/login:
     post:
@@ -262,11 +299,10 @@ paths:
                 type: object
                 properties: 
                   error: 
-                    type: string            
-          
+                    type: string
+
 components:
   securitySchemes:
     JWT:
       type: http
       scheme: bearer
-      bearerFormat: JWT

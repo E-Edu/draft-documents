@@ -34,7 +34,7 @@ paths:
           description: Ok
 
     get:
-      summary: Gets all tasks based on provided parameters 
+      summary: Gets all tasks based on provided query parameters 
       operationId: searchTask
       security: 
       - JWT: [read]
@@ -113,14 +113,14 @@ paths:
                   error :
                     type: string
 
-  /task/{taskId}:
+  /task/{task_id}:
     get:
       summary: Gets a task
       operationId: getTask
       security:  
       - JWT: [read]
       parameters:
-        - name: taskId
+        - name: task_id
           in: path
           required: true
           description: The unique task id
@@ -175,12 +175,62 @@ paths:
                     type: string
   
   
-  /task/next:
+  /task/verify/{task_id}:
+    patch:
+      summary: Verifys a task
+      operationId: verifyTask
+      security:
+      - JWT: [write]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            
+      responses:
+        '200':
+          description: Ok
+          
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+  
+  
+  /task/next/{last_task_id}:
     get:
-      summary: Gets next random task in current lecture
+      summary: Gets next random task in current lecture based on last task
       operationId: getNext
       security:  
       - JWT: [read]
+      parameters:
+        - name: last_task_id
+          in: path
+          required: true
+          description: The unique task id of the last task
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
       responses:
         '200':
           description: Ok
@@ -189,25 +239,22 @@ paths:
               schema:
                 type: object
                 properties:
-                  tasks:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        task_id:
-                          type: integer
-                        task:
-                          type: string
-                        taskType:
-                          type: string
-                        necessary_points:
-                          type: integer
-                        subject:
-                          type: string
-                        lecture:
-                          type: string
-                        difficulty:
-                          type: string
+                  task_id:
+                    type: integer
+                  task:
+                    type: string
+                  taskType:
+                    type: string
+                  necessary_points:
+                    type: integer
+                  subject:
+                    type: string
+                  lecture:
+                    type: string
+                  difficulty:
+                    type: string
+                  author:
+                    type: string
         
         '4XX':
           description: User Error
@@ -262,6 +309,548 @@ paths:
                           type: string
                         difficulty:
                           type: string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/mutiple_choice/{task_id}:
+    get:
+      summary: Get all multiple choice soulutions from task id
+      operationId: getMultipleChoiceSolutions
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  solutions:
+                    type: array
+                    items:
+                      type: string
+                      
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/mutiple_choice/check:
+    put:
+      summary: Check multiple choice soulutions
+      operationId: checkMultipleChoiceSolutions
+      security:
+      - JWT: [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                user_solutions:
+                  type: array
+                  items :
+                    type : string
+      
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/freestyle/{task_id}:
+    get:
+      summary: Get all freestyle soulutions from task id
+      operationId: getFreestyleSolution
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/freestyle/check:
+    put:
+      summary: Check freestyle soulution
+      operationId: checkFreestyleSolution
+      security:
+      - JWT: [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                user_solution:
+                  type: string
+                  
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/equations/{task_id}:
+    get:
+      summary: Get all equations soulution from task id
+      operationId: getEquationsSolution
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/equations/check:
+    put:
+      summary: Check equations soulution
+      operationId: checkEquationSolution
+      security:
+      - JWT: [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                user_solution:
+                  type: string
+                  
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/wordsalad/{task_id}:
+    get:
+      summary: Get all wordsalad soulution from task id
+      operationId: getWordsaladSolution
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  solution:
+                    type: string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+  /solution/wordsalad/check:
+    put:
+      summary: Check wordsalad soulution
+      operationId: checkWordsaladSolution
+      security:
+      - JWT: [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                user_solution:
+                  type: string
+                  
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+
+  /solution/image/{task_id}:
+    get:
+      summary: Get all image soulution from task id WIP
+      operationId: getImageSolution
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+                    
+  /solution/image/check:
+    put:
+      summary: Check image soulution WIP
+      operationId: checkImageSolution
+      security:
+      - JWT: [write]
+                  
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+
+
+  /solution/topic_connection/{task_id}:
+    get:
+      summary: Get all topic connection soulution from task id WIP
+      operationId: getTopicConnectionSolution
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+                    
+  /solution/topic_connection/check:
+    put:
+      summary: check topic connection soulution WIP
+      operationId: checkTopicConnectionSolution
+      security:
+      - JWT: [write]
+                  
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+components:
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    tasks:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          task_id:
+                            type: integer
+                          task:
+                            type: string
+                          taskType:
+                            type: string
+                          necessary_points:
+                            type: integer
+                          subject:
+                            type: string
+                          lecture:
+                            type: string
+                          difficulty:
+                            type: string
         
         '4XX':
           description: User Error
