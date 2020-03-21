@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Task Microservice
+  version: v1
+paths:
+  /task:
+    put:
+      summary: Creates a new task
+      operationId: createTask
+      security: 
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+                necessaryPoints:
+                  type:  integer
+                taskTypeId:
+                  type:  integer
+                subject:
+                  type:  integer
+                module:
+                  type:  integer
+                lecture:
+                  type:  integer
+                difficulty:
+                  type:  integer
+      responses:
+        '200':
+          description: Ok
+
+    get:
+      summary: Gets all tasks created by the user
+      operationId: getTasks
+      security:  
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+
+  /task/{taskId}:
+    get:
+      summary: Gets a task
+      operationId: getTask
+      security:  
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: "null"
+          tokenUrl: "null"
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations

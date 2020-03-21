@@ -10,7 +10,7 @@ This endpoint takes the following  `PUT` request:
     task_id: Guid,
     title: String,
     body: String,
-    TicketType: String
+    ticket_type: String
 }
 ```
 
@@ -61,7 +61,7 @@ This endpoint takes the following  `POST` request:
         sender: Guid,
         title: String,
         body: String,
-        TicketType: String
+        ticket_type: String
 
     }],
     error: String // only present on response codes 40x

@@ -1,0 +1,66 @@
+openapi: '3.0.2'
+info:
+  title: TicketAPI
+  version: '0.1'
+paths:
+  /ticket/create:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: string
+                task_id:
+                  type: string
+                title:
+                  type: string
+                body:
+                  type: string
+                ticet_type:
+                  type: string
+    
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Body contains error specified in error.md
+  
+  /ticket/delete:
+    delete:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: string
+                ticket_id:
+                  type: string
+
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Body contains error specified in error.md
+  
+  /ticket/list:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session: 
+                  type: string
+                  
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Body contains error specified in error.md
+      

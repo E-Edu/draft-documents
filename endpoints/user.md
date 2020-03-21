@@ -10,7 +10,7 @@ This endpoint takes the following `POST` body:
     password: String,
     first_name: String,
     last_name: String,
-    teacher_token: String
+    teacher_token: String // is not present if user is not a teacher
 }
 ```
 *Notice that Passwords should be stored by being hashed with [BCrypt](https://en.wikipedia.org/wiki/Bcrypt).*
@@ -27,9 +27,30 @@ After processing this request a email will be dispatched to the users email addr
 containing a link for verifying their account structured in the following way:
 `https://DOMAIN.TLD/verify?token=$TOKEN`
 
+In case the teacher token is present and valid the teacher is instantly verified and marked as teacher.
+
+---
+
+### `/user/session`
+This endpoint takes the following `POST` body:
+```ts
+{
+    session: String
+}
+```
+
+#### Responses:
+```ts
+{
+    error: String // only present on response codes 40x
+}
+```
+The response will return a `200` response code in case the registration was successful and a `String` in case a [Error](errors.md) ocurred.
+
 In case the teacher token isn't `null` and valid the teacher is instantly verified and marked as teacher.
 
 ---
+
 
 ### `/user/verify`
 This endpoint takes the following `PATCH` arguments:
@@ -50,6 +71,9 @@ This endpoint takes the following `PATCH` arguments:
 If [`error`](errors.md) is set to `null`, the user was successfully verified and a session has been created
 
 ---
+
+### `/user/`
+
 
 ### `/user/login`
 This endpoint takes the following `POST` body:

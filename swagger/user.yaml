@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: User Microservice
+  version: v1
+paths:
+  /user:
+    put:
+      summary: Creates a new user
+      operationId: createUser
+      security: 
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      - OAuth2: [write]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                teacher_token:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+        '400':
+
+
+    get:
+      summary: Gets all tasks created by the user
+      operationId: getTasks
+      security:  
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+
+  /task/{taskId}:
+    get:
+      summary: Gets a task
+      operationId: getTask
+      security:  
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+          
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: "null"
+          tokenUrl: "null"
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations
