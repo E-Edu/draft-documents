@@ -12,7 +12,7 @@
 | INVALID_PERMISSION      | The user has insufficient permissions to perform an action           |
 | INVALID_SESSION         | The Session ID given was invalid or could not be resolved            |
 | INVALID_TASK            | The Task ID given could not be resolved                              |
-
+| MISSING_DATA            | The request was missing data that is required                        |
 
 ---
 
