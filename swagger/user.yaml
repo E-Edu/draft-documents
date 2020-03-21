@@ -235,7 +235,7 @@ paths:
     post:
       tags:
         - user
-      summary: Verifies a email token
+      summary: Checks whether a session is valid or not
       operationId: verify_session
       security: 
       - JWT : [read]
