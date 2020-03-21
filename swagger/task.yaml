@@ -39,6 +39,26 @@ paths:
       responses:
         '200':
           description: Ok
+      
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
 
     get:
       summary: Gets all tasks based on provided query parameters 
@@ -906,7 +926,12 @@ paths:
       security:
       - JWT: [write]
       - ServiceToken : [read, write]
-                  
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
@@ -930,56 +955,6 @@ paths:
                 properties:
                   error :
                     type: string
-
-components:
-  securitySchemes:
-    JWT:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-    ServiceToken:
-      type: http
-      scheme: bearer
-      bearerFormat: ServiceToken
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          task_id:
-                            type: integer
-                          task:
-                            type: string
-                          taskType:
-                            type: string
-                          necessary_points:
-                            type: integer
-                          subject:
-                            type: string
-                          lecture:
-                            type: string
-                          difficulty:
-                            type: string
-        
-        '4XX':
-          description: User Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        
-        '5XX':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-                    
 
 components:
   securitySchemes:

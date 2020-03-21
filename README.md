@@ -12,7 +12,7 @@ To view the swagger documentation in a better format, copy paste the following y
 
 
 ### Endpoint Documentation 
-- [User](endpoints/user.md) (Deprecated)
-- [Task](endpoints/task.md) (Deprecated)
-- [Ticket](endpoints/ticket.md) (Deprecated)
+- [User](endpoints/user.md) **(Deprecated)**
+- [Task](endpoints/task.md) **(Deprecated)**
+- [Ticket](endpoints/ticket.md) **(Deprecated)**
 - [Error Codes](endpoints/errors.md)
