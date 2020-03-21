@@ -3,7 +3,7 @@
 **This is not the final document and is subject to change**
 
 ### `/task`
-This endpoint takes the following `PUT` body:
+This endpoint takes the following `POST` body:
 ```ts
 {
     session: Guid,

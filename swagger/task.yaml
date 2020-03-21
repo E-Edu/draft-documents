@@ -4,7 +4,7 @@ info:
   version: v1
 paths:
   /task:
-    put:
+    post:
       summary: Creates a new task
       operationId: createTask
       security: 
@@ -17,9 +17,9 @@ paths:
               properties:
                 task:
                   type: string
-                necessaryPoints:
+                necessary_points:
                   type:  integer
-                taskTypeId:
+                task_type_id:
                   type:  integer
                 subject:
                   type:  integer
@@ -32,100 +32,9 @@ paths:
       responses:
         '200':
           description: Ok
-          
-        '4XX':
-          description: User Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
-        '5XX':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
 
     get:
-      summary: Gets all tasks created by the user
-      operationId: getTasks
-      security:  
-      - JWT: [read]
-      responses:
-        '200':
-          description: Ok
-        
-        '4XX':
-          description: User Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
-        '5XX':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-
-  /task/{taskId}:
-    get:
-      summary: Gets a task
-      operationId: getTask
-      security:  
-      - JWT: [read]
-      parameters:
-        - name: taskId
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
-      responses:
-        '200':
-          description: Ok
-          
-        '4XX':
-          description: User Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
-        '5XX':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-
-
-  /task/search:
-    get:
-      summary: Gets all tasks based on parameters 
+      summary: Gets all tasks based on provided parameters 
       operationId: searchTask
       security: 
       - JWT: [read]
@@ -173,7 +82,7 @@ paths:
                           type: string
                         taskType:
                           type: string
-                        necessaryPoints:
+                        necessary_points:
                           type: integer
                         subject:
                           type: string
@@ -192,6 +101,176 @@ paths:
                 type: object
                 properties:
                   error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+  /task/{taskId}:
+    get:
+      summary: Gets a task
+      operationId: getTask
+      security:  
+      - JWT: [read]
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_id:
+                    type: integer
+                  task:
+                    type: string
+                  taskType:
+                    type: string
+                  necessary_points:
+                    type: integer
+                  subject:
+                    type: string
+                  lecture:
+                    type: string
+                  difficulty:
+                    type: string
+                  author:
+                    type: string
+          
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+  
+  
+  /task/next:
+    get:
+      summary: Gets next random task in current lecture
+      operationId: getNext
+      security:  
+      - JWT: [read]
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        task_id:
+                          type: integer
+                        task:
+                          type: string
+                        taskType:
+                          type: string
+                        necessary_points:
+                          type: integer
+                        subject:
+                          type: string
+                        lecture:
+                          type: string
+                        difficulty:
+                          type: string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+  /task/my:
+    get:
+      summary: Gets all tasks created by the user
+      operationId: getTasks
+      security:  
+      - JWT: [read]
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        task_id:
+                          type: integer
+                        task:
+                          type: string
+                        taskType:
+                          type: string
+                        necessary_points:
+                          type: integer
+                        subject:
+                          type: string
+                        lecture:
+                          type: string
+                        difficulty:
+                          type: string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
                     type: string
         
         '5XX':
