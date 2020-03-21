@@ -172,6 +172,7 @@ paths:
                     
   /ticket/{ticket_id}/answer:
      put:
+      summary : Mark as troll
       security:
         - JWT: [write]
         - ServiceToken: [write]
