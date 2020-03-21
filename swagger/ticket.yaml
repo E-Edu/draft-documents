@@ -1,7 +1,7 @@
 openapi: '3.0.2'
 info:
   title: Ticket Microservice
-  version: '0.1'
+  version: '1'
 paths:
   /ticket:
     post:
@@ -43,7 +43,7 @@ paths:
                   error: 
                     type: string
   
-  /ticket/delete/{ticket_id}:
+  /ticket/{ticket_id}:
     delete:
       security:
         - JWT: [write]
@@ -87,16 +87,6 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                session: 
-                  type: string
-                  format: guid
-
       responses:
         '200':
           description: Body contains an array of tickets
@@ -120,9 +110,7 @@ paths:
                     body:
                       type: string
                     ticket_type:
-                      type: string
-
-                  
+                      type: string     
         '4XX':
           description: Returns an error, see errors.md
           content:
@@ -134,7 +122,7 @@ paths:
                     type: string
     
   
-  /ticket/edit/{ticket_id}:
+  /ticket/{ticket_id}/edit:
     put:
       security:
         - JWT: [write]
@@ -159,8 +147,50 @@ paths:
             schema:
               type: object
               properties:
-                comment:
+                title:
                   type: string
+                body:
+                  type: string
+
+      responses:
+        '200':
+          description: OK
+        '4XX':
+          description: Returns an error, see errors.md
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  error: 
+                    type: string
+  
+                    
+  /ticket/{ticket_id}/answer:  
+     put:
+      security:
+        - JWT: [write]
+        - ServiceToken: [write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: ticket_id
+          in: path
+          required: true
+          description: The ID corresponding to the ticket
+          schema:  
+            type: string
+            format: guid
+            minimum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
                 is_troll:
                   type: boolean
 
@@ -176,8 +206,6 @@ paths:
                 properties: 
                   error: 
                     type: string
-    
-
 components:
   securitySchemes:
     JWT:
@@ -188,4 +216,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: randomstring
-
