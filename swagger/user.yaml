@@ -124,8 +124,8 @@ paths:
                 properties: 
                   error: 
                     type: string           
-  /user/info:
-    post:
+  /user/info/{user_guid}:
+    get:
       tags:
         - user
       summary: Gets user info. 
@@ -137,19 +137,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: user_guid
+          in : path
+          required: true
+          schema:
+            type: string
       security: 
       - JWT : [read]
       - ServiceToken: [write]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                session:
-                  type: string
-                user:
-                  type: string
       responses:
         200:
           description: The response will return privilege flags of the requested User in case the verification was successful and a error *String* in case a **Error** ocurred. **report_spammer** will always return 0 unless the session owner has the correct rights.
@@ -195,18 +190,10 @@ paths:
                     type: string            
   /user/verify:
     patch:
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
       tags:
         - user
-      summary: Verifies a session token
+      summary: Verifies an email token
       operationId: verify
-      security: 
-      - JWT : [read]
       requestBody:
         content:
           application/json:
@@ -243,11 +230,12 @@ paths:
                 properties: 
                   error: 
                     type: string
+                    
   /user/verify_session:
     post:
       tags:
         - user
-      summary: Verifies a session token
+      summary: Verifies a email token
       operationId: verify_session
       security: 
       - JWT : [read]
@@ -290,19 +278,10 @@ paths:
 
   /user/login:
     post:
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
       tags:
         - user
       summary: Used to login a user
       operationId: login
-      security: 
-      - JWT : [write]
-      - ServiceToken: [write]
       requestBody:
         content:
           application/json:
@@ -315,7 +294,7 @@ paths:
                   type: string
       responses:
         200:
-          description: Ok
+          description: Oka
           content:
             application/json:
               schema: 
