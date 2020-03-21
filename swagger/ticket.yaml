@@ -9,7 +9,7 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-      - name: X-Session
+      - name: Authorization
         in: header
         required: true
         schema:
