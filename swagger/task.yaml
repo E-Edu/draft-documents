@@ -2,6 +2,12 @@ openapi: 3.0.1
 info:
   title: Task Microservice WIP
   version: v1
+servers:
+- url: http://localhost:5000 
+- url: https://localhost:5000 
+tags:
+- name: task
+  description: Task Microservice
 paths:
   /task:
     post:

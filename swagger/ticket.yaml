@@ -2,6 +2,12 @@ openapi: '3.0.2'
 info:
   title: Ticket Microservice
   version: '1'
+servers:
+- url: http://localhost:5000 
+- url: https://localhost:5000 
+tags:
+- name: ticket
+  description: Ticket Microservice
 paths:
   /ticket:
     post:

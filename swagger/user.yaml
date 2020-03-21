@@ -2,6 +2,9 @@ openapi: 3.0.1
 info:
   title: User Microservice
   version: v1
+servers:
+- url: http://localhost:5000 
+- url: https://localhost:5000
 tags:
 - name: user
   description: User Microservice
