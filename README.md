@@ -2,12 +2,6 @@
 
 [Svg Drawings of Concept](Concept.md)
 
-### Endpoint Documentation
-- [User](endpoints/user.md)
-- [Task](endpoints/task.md)
-- [Ticket](endpoints/ticket.md)
-- [Error Codes](endpoints/errors.md)
-
 ### Swagger Documentation
 
 To view the swagger documentation in a better format, copy paste the following yamls into the [Swagger Editor](https://editor.swagger.io/) 
@@ -15,3 +9,10 @@ To view the swagger documentation in a better format, copy paste the following y
 - [User](swagger/user.yaml)
 - [Task](swagger/task.yaml) 
 - [Ticket](swagger/ticket.yaml)
+
+
+### Endpoint Documentation 
+- [User](endpoints/user.md) (Deprecated)
+- [Task](endpoints/task.md) (Deprecated)
+- [Ticket](endpoints/ticket.md) (Deprecated)
+- [Error Codes](endpoints/errors.md)
