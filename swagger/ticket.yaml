@@ -5,6 +5,7 @@ info:
 paths:
   /ticket:
     post:
+      summary: Creates a new ticket
       security: 
         - JWT: [write]
         - ServiceToken: [write]
@@ -45,6 +46,7 @@ paths:
   
   /ticket/{ticket_id}:
     delete:
+      summary : Deletes a ticket
       security:
         - JWT: [write]
         - ServiceToken: [write]
@@ -78,6 +80,7 @@ paths:
   
   /ticket/list:
     post:
+      summary: Returns a list of all available tickets
       security:
         - JWT: [read]
         - ServiceToken: [write]
@@ -124,6 +127,7 @@ paths:
   
   /ticket/{ticket_id}/edit:
     put:
+      summary : Changes a speifc tickets title and body.
       security:
         - JWT: [write]
         - ServiceToken: [write]
@@ -166,7 +170,7 @@ paths:
                     type: string
   
                     
-  /ticket/{ticket_id}/answer:  
+  /ticket/{ticket_id}/answer:
      put:
       security:
         - JWT: [write]
