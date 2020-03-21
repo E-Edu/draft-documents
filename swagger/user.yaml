@@ -124,7 +124,7 @@ paths:
                 properties: 
                   error: 
                     type: string           
-  /user/info/{user_guid}:
+  /user/{user_guid}/info:
     get:
       tags:
         - user
@@ -231,12 +231,12 @@ paths:
                   error: 
                     type: string
                     
-  /user/verify_session:
+  /user/session:
     post:
       tags:
         - user
       summary: Checks whether a session is valid or not
-      operationId: verify_session
+      operationId: session
       security: 
       - JWT : [read]
       - ServiceToken: [write]
