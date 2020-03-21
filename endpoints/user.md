@@ -122,6 +122,6 @@ A user can NEVER alter their own `report_spammer`!
 ```
 If `error` is set to `null`, the operation was successful.
 
+---
 
-###### [Back](README.md)
-___
+###### [Back](../README.md)

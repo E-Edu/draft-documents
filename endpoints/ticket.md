@@ -10,6 +10,7 @@ This endpoint takes the following  `PUT` request:
     task_id: Guid,
     title: String,
     body: String,
+    TicketType: String
 }
 ```
 
@@ -28,7 +29,7 @@ This endpoint takes the following `DELETE` request
 ```ts
 {
     session: Guid,
-    ticket_id: Guid,
+    ticket_id: Guid
 }
 ```
 
@@ -59,7 +60,9 @@ This endpoint takes the following  `POST` request:
         task_id: Guid,
         sender: Guid,
         title: String,
-        body: String
+        body: String,
+        TicketType: String
+
     }],
     error: String // only present on response codes 40x
 }
@@ -88,6 +91,6 @@ This endpoint takes the following `PUT` request:
 }
 ```
 
+---
 
-___
-###### [Back](README.md)
+###### [Back](../README.md)
