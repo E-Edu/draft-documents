@@ -57,6 +57,10 @@ paths:
       responses:
         '200':
           description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
       
         '4XX':
           description: User Error

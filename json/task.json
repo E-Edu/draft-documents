@@ -98,7 +98,14 @@
 				},
 				"responses": {
 					"200": {
-						"description": "Ok"
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Task"
+								}
+							}
+						}
 					},
 					"4XX": {
 						"description": "User Error",
