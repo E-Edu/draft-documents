@@ -1,4 +1,3 @@
-
 openapi: 3.0.1
 info:
   title: Task Microservice WIP
@@ -45,16 +44,16 @@ paths:
                   type: string
                 necessary_points:
                   type:  integer
-                task_type_id:
-                  type:  integer
+                task_type_display_name:
+                  type:  string
                 subject:
-                  type:  integer
+                  type:  string
                 module:
                   type:  integer
-                lecture:
+                lecture_display_name:
                   type:  integer
-                difficulty:
-                  type:  integer
+                difficulty_display_name:
+                  type:  string
       responses:
         '200':
           description: Ok
