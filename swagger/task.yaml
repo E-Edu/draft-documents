@@ -63,21 +63,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-      
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
     get:
       tags:
       - task
@@ -128,22 +125,18 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Task'
-                          
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-
   /task/{task_id}:
     get:
       tags:
@@ -167,7 +160,6 @@ paths:
             type: integer
             format: int64
             minimum: 0
-            
       responses:
         '200':
           description: Ok
@@ -175,14 +167,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-          
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -214,7 +204,6 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
@@ -270,14 +259,12 @@ paths:
       responses:
         '200':
           description: Ok
-      
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -300,7 +287,6 @@ paths:
           required: true
           schema:
             type: string
-            
       responses:
         '200':
           description: Ok
@@ -315,7 +301,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -323,7 +308,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /task/{last_task_id}:
+  /task/next:
     post:
       tags:
       - task
@@ -360,14 +345,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -399,14 +382,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -450,14 +431,12 @@ paths:
                     type: array
                     items:
                       type: string
-                      
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -493,18 +472,15 @@ paths:
                   type: array
                   items :
                     type : string
-      
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -539,14 +515,12 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -580,18 +554,15 @@ paths:
                   type: integer
                 user_solution:
                   type: string
-                  
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -625,7 +596,6 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
@@ -666,11 +636,9 @@ paths:
                   type: integer
                 user_solution:
                   type: string
-                  
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
@@ -718,14 +686,12 @@ paths:
                 properties:
                   solution:
                     type: string
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -759,18 +725,15 @@ paths:
                   type: integer
                 user_solution:
                   type: string
-                  
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -806,22 +769,18 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
-                    
   /solution/image/check:
     post:
       tags:
@@ -846,25 +805,21 @@ paths:
                   type: string
                   example:
                     LINK_TO_IMAGE
-      
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
 
 
   /solution/topic_connection/{task_id}:
@@ -906,22 +861,18 @@ paths:
                         type: string
                       example:
                         Connection Point a: Connection Point b
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
-                    
   /solution/topic_connection/check:
     post:
       tags:
@@ -954,14 +905,12 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -995,14 +944,12 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1032,21 +979,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Subject'
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          
   /subject/{display_name}:
     get:
       tags:
@@ -1075,14 +1019,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Subject'
 
-                        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1111,21 +1053,18 @@ paths:
       responses:
         '200':
           description: Ok
-                        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
   /module:
     post:
       tags:
@@ -1154,21 +1093,18 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
     get:
       tags:
       - module
@@ -1192,7 +1128,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Module'
-          
   /module/{display_name}:
     get:
       tags:
@@ -1220,14 +1155,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Module'
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1256,14 +1189,12 @@ paths:
       responses:
         '200':
           description: Ok
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1271,8 +1202,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-    
-                    
   /subject/{subject_display_name}/module:
     get:
       tags:
@@ -1307,14 +1236,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
   /lecture:
     post:
       tags:
@@ -1349,15 +1276,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                    
-          
     get:
       tags:
       - lecture
@@ -1381,14 +1305,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Lecture'
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1423,15 +1345,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Module'
-                          
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1460,14 +1379,12 @@ paths:
       responses:
         '200':
           description: Ok
-                  
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1475,7 +1392,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-                    
   /module/{module_display_name}/lecture:
     get:
       tags:
@@ -1512,14 +1428,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
   /difficulty:
     post:
       tags:
@@ -1552,14 +1466,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          
     get:
       tags:
       - difficulty
@@ -1584,21 +1496,18 @@ paths:
                 items:
                   $ref: '#/components/schemas/Difficulty'
 
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
   /difficulty/{display_name}:
     get:
       tags:
@@ -1626,14 +1535,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Difficulty'  
-        
         '4XX':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
@@ -1669,15 +1576,163 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'    
+  /task_type:
+    post:
+      tags:
+        - task_type
+      summary: Create task type
+      operationId: createTaskType
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - task_type
+      summary: Get all task types
+      operationId: getAllTaskTypes
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskType'
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /task_type/{display_name}:
+    get:
+      tags:
+      - task_type
+      summary: Get task type
+      operationId: getTaskType
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name : display_name
+        in : path
+        required : true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskType'  
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - task_type
+      summary: Delete task type
+      operationId: deleteTaskType
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name : display_name
+        in : path
+        required : true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskType'  
 
-
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     JWT:
@@ -1728,7 +1783,6 @@ components:
         module_id:
           type: integer
           example: 5
-    
     Module:
       type: object
       properties:
@@ -1741,7 +1795,6 @@ components:
         subject_id:
           type: integer
           example: 3
-    
     Subject:
       type: object
       properties:
@@ -1751,7 +1804,6 @@ components:
         display_name:
           type: string
           example: Mathe
-    
     Difficulty:
       type: object
       properties:
@@ -1761,7 +1813,15 @@ components:
         display_name:
           type: string
           example: Schwer
-    
+    TaskType:
+      type: object
+      properties:
+        task_type_id:
+          type: integer
+          example: 2
+        display_name:
+          type: string
+          example: Schwer
     Error:
       type: object
       properties:
