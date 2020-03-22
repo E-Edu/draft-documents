@@ -18,6 +18,8 @@ tags:
   description: Task Microservice
 - name: difficulty
   description: Task Microservice
+- name: task_type
+  description: Task Microservice
 paths:
   /task:
     post:
@@ -321,7 +323,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /task/{last_task_id}/next:
+  /task/{last_task_id}:
     post:
       tags:
       - task
@@ -337,14 +339,6 @@ paths:
           required: true
           schema:
             type: string
-        - name: last_task_id
-          in: path
-          required: true
-          description: The unique task id of the last task
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
       requestBody:
         content:
           application/json:
