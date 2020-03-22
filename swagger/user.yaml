@@ -191,7 +191,55 @@ paths:
                 type: object
                 properties: 
                   error: 
-                    type: string            
+                    type: string  
+  
+  /user/{user_guid}/ban:
+    post:
+      tags:
+      - user
+      summary: Bans an User
+      operationId: ban_user
+      security:
+        - ServiceToken: [read]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: user_guid
+          in : path
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        '200':
+          description: Ok
+      
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+
+                    
+
   /user/verify:
     patch:
       tags:
