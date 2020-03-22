@@ -1,3 +1,4 @@
+
 openapi: 3.0.1
 info:
   title: Task Microservice WIP
@@ -11,6 +12,8 @@ tags:
 paths:
   /task:
     post:
+      tags:
+      - task
       summary: Creates a new task
       operationId: createTask
       security: 
@@ -67,6 +70,8 @@ paths:
                     type: string
 
     get:
+      tags:
+      - task
       summary: Gets all tasks based on provided query parameters 
       operationId: searchTask
       security: 
@@ -154,6 +159,8 @@ paths:
 
   /task/{task_id}:
     get:
+      tags:
+      - task
       summary: Gets a task
       operationId: getTask
       security:  
@@ -222,6 +229,8 @@ paths:
   
   /task/verify/{task_id}:
     patch:
+      tags:
+      - task
       summary: Verifys a task
       operationId: verifyTask
       security:
@@ -269,6 +278,8 @@ paths:
   
   /task/next/{last_task_id}:
     get:
+      tags:
+      - task
       summary: Gets next random task in current lecture based on last task
       operationId: getNext
       security:  
@@ -335,6 +346,8 @@ paths:
 
   /task/my:
     get:
+      tags:
+      - task
       summary: Gets all tasks created by the user
       operationId: getTasks
       security:  
@@ -397,6 +410,8 @@ paths:
 
   /solution/mutiple_choice/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all multiple choice soulutions from task id
       operationId: getMultipleChoiceSolutions
       security:  
@@ -452,6 +467,8 @@ paths:
 
   /solution/mutiple_choice/check:
     post:
+      tags:
+      - task
       summary: Check multiple choice soulutions
       operationId: checkMultipleChoiceSolutions
       security:
@@ -503,6 +520,8 @@ paths:
 
   /solution/freestyle/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all freestyle soulutions from task id
       operationId: getFreestyleSolution
       security:  
@@ -549,6 +568,8 @@ paths:
 
   /solution/freestyle/check:
     post:
+      tags:
+      - task
       summary: Check freestyle soulution
       operationId: checkFreestyleSolution
       security:
@@ -598,6 +619,8 @@ paths:
 
   /solution/equations/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all equations soulution from task id
       operationId: getEquationsSolution
       security:  
@@ -644,6 +667,8 @@ paths:
 
   /solution/equations/check:
     post:
+      tags:
+      - task
       summary: Check equations soulution
       operationId: checkEquationSolution
       security:
@@ -693,6 +718,8 @@ paths:
 
   /solution/wordsalad/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all wordsalad soulution from task id
       operationId: getWordsaladSolution
       security:  
@@ -746,6 +773,8 @@ paths:
 
   /solution/wordsalad/check:
     post:
+      tags:
+      - task
       summary: Check wordsalad soulution
       operationId: checkWordsaladSolution
       security:
@@ -796,6 +825,8 @@ paths:
 
   /solution/image/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all image soulution from task id
       operationId: getImageSolution
       security:  
@@ -842,6 +873,8 @@ paths:
                     
   /solution/image/check:
     post:
+      tags:
+      - task
       summary: Check image soulution
       security:
       - JWT: [write]
@@ -891,6 +924,8 @@ paths:
 
   /solution/topic_connection/{task_id}:
     get:
+      tags:
+      - task
       summary: Get all topic connection soulution from task id
       operationId: getTopicConnectionSolution
       security:  
@@ -950,6 +985,8 @@ paths:
                     
   /solution/topic_connection/check:
     post:
+      tags:
+      - task
       summary: check topic connection soulution
       operationId: checkTopicConnectionSolution
       security:
@@ -978,6 +1015,520 @@ paths:
       responses:
         '200':
           description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+  /subject:
+    post:
+      tags:
+      - task
+      summary: Create a subject
+      operationId: createSubject
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  displayName:
+                    type: string
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+    get:
+      tags:
+      - task
+      summary: Get all subjects
+      operationId: getSubjects
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subjects :
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Mathe
+                      - Englisch
+                      - Deutsch
+                      - Informatik
+          
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+          
+  /subject/{displayName}:
+    get:
+      tags:
+      - task
+      summary: Get subject WIP
+      operationId: getSubject
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: WIP Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subject :
+                    type: object
+                    properties:
+                      WIP :
+                        type : string
+                        description : WIP
+                        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+  /module:
+    post:
+      tags:
+      - task
+      summary: Create module
+      operationId: createModule
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  displayName:
+                    type: string
+                  subjectDisplayName:
+                    type: string
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+    get:
+      tags:
+      - task
+      summary: Get all modules
+      operationId: getModules
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          
+  /module/{displayName}:
+    get:
+      tags:
+      - task
+      summary: Get module WIP
+      operationId: getModule
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok WIP
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    lecture:
+                      type: object
+                      properties:
+                        WIP: 
+                          type : string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+  /subject/{subjectDisplayName}/module:
+    get:
+      tags:
+      - task
+      summary: Get modules from subject
+      operationId: getModulesFromSubject
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: subjectDisplayName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modules:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - Geometrie
+                    - Algebra
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+  /lecture:
+    post:
+      tags:
+      - task
+      summary: Create lecture
+      operationId: createLecture
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                moduleDisplayName:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          
+    get:
+      tags:
+      - task
+      summary: Get all lectures
+      operationId: getLectures
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lectures:
+                    type: array
+                    items:
+                      type: string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+  /lecture/{displayName}:
+    get:
+      tags:
+      - task
+      summary: Get lecture WIP
+      operationId: getLecture
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok WIP
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    lecture:
+                      type: object
+                      properties:
+                        WIP: 
+                          type : string
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+                    
+  /module/{moduleDisplayName}/lecture:
+    get:
+      tags:
+      - task
+      summary: Get lectures from module
+      operationId: getLecturesFromModule
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: moduleDisplayName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lectures:
+                    type: array
+                    items:
+                      type: string
         
         '4XX':
           description: User Error

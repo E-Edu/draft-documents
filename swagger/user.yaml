@@ -126,12 +126,13 @@ paths:
                 type: object
                 properties: 
                   error: 
-                    type: string           
+                    type: string
+
   /user/{user_guid}/info:
     get:
       tags:
         - user
-      summary: Gets user info. 
+      summary: Gets user info.
       description: If **user** is set to *null* information about the owner of the Session is returned, otherwise information of the requested **user** is provided, if the session owner has the right permission to request them.
       operationId: get_user
       parameters:
