@@ -362,10 +362,11 @@ paths:
                     type: string
 
   /task/{last_task_id}/next:
-    get:
+    post:
       tags:
       - task
-      summary: Gets next random task in current lecture based on last task
+      summary: Gets next random task
+      description: Gets next random task in current lecture based on last task and takes an integer array of the already absolved tasks ids.
       operationId: getNext
       security:  
       - JWT: [read]
@@ -384,6 +385,20 @@ paths:
             type: integer
             format: int64
             minimum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of tasks that have already been absolved
+              items:
+                type: integer
+            example:
+            - 0
+            - 3
+            - 6
+            - 7
+            - 2
       responses:
         '200':
           description: Ok
