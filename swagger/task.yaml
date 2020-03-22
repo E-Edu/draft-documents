@@ -128,24 +128,7 @@ paths:
                   tasks:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        task_id:
-                          type: integer
-                        task:
-                          type: string
-                        taskType:
-                          type: string
-                        necessary_points:
-                          type: integer
-                        subject:
-                          type: string
-                        lecture:
-                          type: string
-                        difficulty:
-                          type: string
-                        author:
-                          type: string
+                      $ref: '#/components/schemas/Task'
                           
         '4XX':
           description: User Error
@@ -166,6 +149,8 @@ paths:
                 properties:
                   error :
                     type: string
+
+
 
   /task/{task_id}:
     get:
@@ -197,24 +182,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  task_id:
-                    type: integer
-                  task:
-                    type: string
-                  taskType:
-                    type: string
-                  necessary_points:
-                    type: integer
-                  subject:
-                    type: string
-                  lecture:
-                    type: string
-                  difficulty:
-                    type: string
-                  author:
-                    type: string
+                $ref: '#/components/schemas/Task'
           
         '4XX':
           description: User Error
@@ -235,8 +203,54 @@ paths:
                 properties:
                   error :
                     type: string
-  
-  
+    delete:
+      tags:
+        - task 
+      summary: Deletes a Task
+      operationId: deleteTask
+      security:
+        - JWT: [write]
+        - ServiceToken: [write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+
+
+
   /task/{task_id}/verify:
     patch:
       tags:
@@ -267,37 +281,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  task_id: 
-                    type: integer
-                  authorId:
-                    type: string
-                    format: guid
-                  task:
-                    type: string
-                    example: Ordne die Wörter in der richtigen Reihenfolge!
-                  necessary_points:
-                    type: integer
-                    example: 0
-                  verified:
-                    type: boolean
-                    example: true
-                  lectureId:
-                    type: integer
-                    example:
-                      5
-                  displayName:
-                    type: string
-                    example: SVO
-
-                  task_type_id:
-                    type: integer
-                    example: 5
-
-                  difficulty:
-                    type: string
-                    example: Hard
+                $ref: '#/components/schemas/Task'
 
         '4XX':
           description: User Error
@@ -318,7 +302,7 @@ paths:
                 properties:
                   error :
                     type: string
-  
+ 
   
   /task/{last_task_id}/next:
     get:
@@ -349,24 +333,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  task_id:
-                    type: integer
-                  task:
-                    type: string
-                  taskType:
-                    type: string
-                  necessary_points:
-                    type: integer
-                  subject:
-                    type: string
-                  lecture:
-                    type: string
-                  difficulty:
-                    type: string
-                  author:
-                    type: string
+                $ref: '#/components/schemas/Task'
         
         '4XX':
           description: User Error
@@ -409,27 +376,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  tasks:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        task_id:
-                          type: integer
-                        task:
-                          type: string
-                        taskType:
-                          type: string
-                        necessary_points:
-                          type: integer
-                        subject:
-                          type: string
-                        lecture:
-                          type: string
-                        difficulty:
-                          type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
         
         '4XX':
           description: User Error
@@ -1101,7 +1050,7 @@ paths:
             schema:
                 type: object
                 properties:
-                  displayName:
+                  display_name:
                     type: string
       responses:
         '200':
@@ -1148,13 +1097,7 @@ paths:
               schema:
                 type: array
                 items:
-                  properties:
-                    subjectId :
-                      type : integer
-                    displayName:
-                        type: string
-                        example:
-                          subject
+                  $ref: '#/components/schemas/Subject'
         
         '4XX':
           description: User Error
@@ -1176,7 +1119,7 @@ paths:
                   error :
                     type: string
           
-  /subject/{displayName}:
+  /subject/{display_name}:
     get:
       tags:
       - subject
@@ -1191,7 +1134,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: displayName
+        - name: display_name
           in: path
           required: true
           schema:
@@ -1202,14 +1145,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subjectId:
-                    type: integer
-                  displayName:
-                    type: string
-                    example:
-                      Deutsch
+                $ref: '#/components/schemas/Subject'
 
                         
         '4XX':
@@ -1253,9 +1189,9 @@ paths:
             schema:
                 type: object
                 properties:
-                  displayName:
+                  display_name:
                     type: string
-                  subjectDisplayName:
+                  subject_display_name:
                     type: string
       responses:
         '200':
@@ -1303,18 +1239,9 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    moduleId:
-                      type: integer
-                      example: 7
-                    displayName:
-                      type: string
-                      example: Geometrie
-                    subjectId:
-                      type: integer
+                  $ref: '#/components/schemas/Module'
           
-  /module/{displayName}:
+  /module/{display_name}:
     get:
       tags:
       - module
@@ -1329,7 +1256,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: displayName
+        - name: display_name
           in: path
           required: true
           schema:
@@ -1340,16 +1267,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  moduleId:
-                    type: integer
-                    example: 7
-                  displayName:
-                    type: string
-                    example: Geometrie
-                  subjectId:
-                    type: integer
+                $ref: '#/components/schemas/Module'
         
         '4XX':
           description: User Error
@@ -1371,7 +1289,7 @@ paths:
                   error :
                     type: string
                     
-  /subject/{subjectDisplayName}/module:
+  /subject/{subject_display_name}/module:
     get:
       tags:
       - subject
@@ -1386,7 +1304,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: subjectDisplayName
+        - name: subject_display_name
           in: path
           required: true
           schema:
@@ -1397,20 +1315,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  moduleId:
-                    type: integer
-                    example:
-                      4
-                  subjectId:
-                    type: integer
-                    example:
-                      12
-                  displayName: 
-                    type: string
-                    example:
-                      Gramatik
+                $ref: '#/components/schemas/Module'
+
         '4XX':
           description: User Error
           content:
@@ -1452,9 +1358,9 @@ paths:
             schema:
               type: object
               properties:
-                displayName:
+                display_name:
                   type: string
-                moduleDisplayName:
+                module_display_name:
                   type: string
       responses:
         '200':
@@ -1482,18 +1388,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    lectureId:
-                      type: integer
-                      example : 2
-                    displayName:
-                      type: string
-                      example: Dreiecke
-                    moduleId:
-                      type: integer
-                      example:
-                        2
+                  $ref: '#/components/schemas/Lecture'
         
         '4XX':
           description: User Error
@@ -1514,8 +1409,8 @@ paths:
                 properties:
                   error :
                     type: string
-                    
-  /lecture/{displayName}:
+
+  /lecture/{display_name}:
     get:
       tags:
       - lecture
@@ -1530,7 +1425,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: displayName
+        - name: display_name
           in: path
           required: true
           schema:
@@ -1541,18 +1436,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  lectureId:
-                    type: integer
-                    example : 2
-                  displayName:
-                    type: string
-                    example: Dreiecke
-                  moduleId:
-                    type: integer
-                    example:
-                      13
+                $ref: '#/components/schemas/Module'
                           
         
         '4XX':
@@ -1575,7 +1459,7 @@ paths:
                   error :
                     type: string
                     
-  /module/{moduleDisplayName}/lecture:
+  /module/{module_display_name}/lecture:
     get:
       tags:
       - module
@@ -1590,7 +1474,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: moduleDisplayName
+        - name: module_display_name
           in: path
           required: true
           schema:
@@ -1603,20 +1487,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    lectureId:
-                      type: integer
-                      example:
-                        2
-                    displayName:
-                      type: string
-                      example:
-                        Dreiecke
-                    moduleId:
-                      type: integer
-                      example:
-                        5
+                  $ref: '#/components/schemas/Module'
 
         '4XX':
           description: User Error
@@ -1659,7 +1530,7 @@ paths:
             schema:
               type: object
               properties:
-                displayName:
+                display_name:
                   type: string
       responses:
         '200':
@@ -1687,12 +1558,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    displayName:
-                      type: string
-                    difficultyId:
-                      type: integer
+                  $ref: '#/components/schemas/Difficulty'
 
         
         '4XX':
@@ -1715,7 +1581,7 @@ paths:
                   error :
                     type: string
   
-  /difficulty/{displayName}:
+  /difficulty/{display_name}:
     get:
       tags:
       - difficulty
@@ -1730,7 +1596,7 @@ paths:
         required: true
         schema:
           type: string
-      - name : displayName
+      - name : display_name
         in : path
         required : true
         schema:
@@ -1741,16 +1607,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  displayName:
-                    type: string
-                    example:
-                      hard
-                  difficultyId:
-                    type : integer
-                    example:
-                      1    
+                $ref: '#/components/schemas/Difficulty'  
         
         '4XX':
           description: User Error
@@ -1774,7 +1631,6 @@ paths:
       
 
 
-      
 components:
   securitySchemes:
     JWT:
@@ -1785,3 +1641,76 @@ components:
       type: http
       scheme: bearer
       bearerFormat: randomstring
+  schemas:
+    Task:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          example: 5
+        author_id:
+          type: string
+          example: 0b870676-1a01-47aa-8402-859fb9806238
+        task:
+          type: string
+        necessary_points:
+          type: integer
+        verified:
+          type: boolean
+          example:
+            false
+        lecture_id:
+          type: integer
+          example: 2
+        task_type_id:
+          type: integer
+          example: 0
+        difficulty_id:
+          type: integer
+          example: 2
+
+    Lecture:
+      type: object
+      properties:
+        lecture_id:
+          type: integer
+          example: 2
+        display_name:
+          type: string
+          example: Dreiecke
+        module_id:
+          type: integer
+          example: 5
+    
+    Module:
+      type: object
+      properties:
+        module_id:
+          type: integer
+          example: 5
+        display_name:
+          type: string
+          example: Geometrie
+        subject_id:
+          type: integer
+          example: 3
+    
+    Subject:
+      type: object
+      properties:
+        subject_id:
+          type: integer
+          example: 3
+        display_name:
+          type: string
+          example: Mathe
+    
+    Difficulty:
+      type: object
+      properties:
+        difficulty_id:
+          type: integer
+          example: 2
+        display_name:
+          type: string
+          example: Schwer
