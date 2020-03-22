@@ -46,10 +46,10 @@ paths:
                   type:  integer
                 task_type_display_name:
                   type:  string
-                subject:
+                subject_display_name:
                   type:  string
-                module:
-                  type:  integer
+                module_display_name:
+                  type:  string
                 lecture_display_name:
                   type:  integer
                 difficulty_display_name:
@@ -247,8 +247,65 @@ paths:
                 properties:
                   error :
                     type: string
-
-
+    put:
+      tags:
+      - task
+      summary: Edits a new Task
+      operationId: editTask
+      security: 
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                task:
+                  type: string
+                necessary_points:
+                  type:  integer
+                task_type_display_name:
+                  type:  string
+                subject_display_name:
+                  type:  string
+                module_display_name:
+                  type:  string
+                lecture_display_name:
+                  type:  string
+                difficulty_display_name:
+                  type:  string
+      responses:
+        '200':
+          description: Ok
+      
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
 
   /task/{task_id}/verify:
     patch:
@@ -282,65 +339,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Task'
 
-        '4XX':
-          description: User Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
-        '5XX':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-    
-  /task/{task_id}/edit: 
-    put:
-      tags:
-      - task
-      summary: Edits a new Task
-      operationId: editTask
-      security: 
-      - JWT: [write]
-      - ServiceToken : [read, write]
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                task:
-                  type: string
-                necessary_points:
-                  type:  integer
-                task_type_display_name:
-                  type:  string
-                subject:
-                  type:  string
-                module:
-                  type:  integer
-                lecture_display_name:
-                  type:  integer
-                difficulty_display_name:
-                  type:  string
-      responses:
-        '200':
-          description: Ok
-      
         '4XX':
           description: User Error
           content:
