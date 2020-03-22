@@ -150,7 +150,6 @@ paths:
                     type: string
 
 
-
   /task/{task_id}:
     get:
       tags:
@@ -261,14 +260,17 @@ paths:
           required: true
           schema:
             type: string
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                task_id:
-                  type: integer
                 task:
                   type: string
                 necessary_points:
