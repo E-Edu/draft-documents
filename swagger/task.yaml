@@ -4,8 +4,8 @@ info:
   title: Task Microservice WIP
   version: v1
 servers:
+- url: https://task.e-edu.the-morpheus.de/
 - url: http://localhost:80
-- url: https://localhost:80
 tags:
 - name: task
   description: Task Microservice
