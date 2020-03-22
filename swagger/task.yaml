@@ -4,10 +4,20 @@ info:
   title: Task Microservice WIP
   version: v1
 servers:
-- url: http://localhost:5000 
-- url: https://localhost:5000 
+- url: http://localhost:80
+- url: https://localhost:80
 tags:
 - name: task
+  description: Task Microservice
+- name: subject
+  description: Task Microservice
+- name: module
+  description: Task Microservice
+- name: lecture
+  description: Task Microservice
+- name: solution
+  description: Task Microservice
+- name: difficulty
   description: Task Microservice
 paths:
   /task:
@@ -227,7 +237,7 @@ paths:
                     type: string
   
   
-  /task/verify/{task_id}:
+  /task/{task_id}/verify:
     patch:
       tags:
       - task
@@ -254,7 +264,41 @@ paths:
       responses:
         '200':
           description: Ok
-          
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_id: 
+                    type: integer
+                  authorId:
+                    type: string
+                    format: guid
+                  task:
+                    type: string
+                    example: Ordne die Wörter in der richtigen Reihenfolge!
+                  necessary_points:
+                    type: integer
+                    example: 0
+                  verified:
+                    type: boolean
+                    example: true
+                  lectureId:
+                    type: integer
+                    example:
+                      5
+                  displayName:
+                    type: string
+                    example: SVO
+
+                  task_type_id:
+                    type: integer
+                    example: 5
+
+                  difficulty:
+                    type: string
+                    example: Hard
+
         '4XX':
           description: User Error
           content:
@@ -276,7 +320,7 @@ paths:
                     type: string
   
   
-  /task/next/{last_task_id}:
+  /task/{task_id}/next:
     get:
       tags:
       - task
@@ -411,7 +455,7 @@ paths:
   /solution/mutiple_choice/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all multiple choice soulutions from task id
       operationId: getMultipleChoiceSolutions
       security:  
@@ -468,7 +512,7 @@ paths:
   /solution/mutiple_choice/check:
     post:
       tags:
-      - task
+      - solution
       summary: Check multiple choice soulutions
       operationId: checkMultipleChoiceSolutions
       security:
@@ -521,7 +565,7 @@ paths:
   /solution/freestyle/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all freestyle soulutions from task id
       operationId: getFreestyleSolution
       security:  
@@ -569,7 +613,7 @@ paths:
   /solution/freestyle/check:
     post:
       tags:
-      - task
+      - solution
       summary: Check freestyle soulution
       operationId: checkFreestyleSolution
       security:
@@ -620,7 +664,7 @@ paths:
   /solution/equations/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all equations soulution from task id
       operationId: getEquationsSolution
       security:  
@@ -668,7 +712,7 @@ paths:
   /solution/equations/check:
     post:
       tags:
-      - task
+      - solution
       summary: Check equations soulution
       operationId: checkEquationSolution
       security:
@@ -719,7 +763,7 @@ paths:
   /solution/wordsalad/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all wordsalad soulution from task id
       operationId: getWordsaladSolution
       security:  
@@ -774,7 +818,7 @@ paths:
   /solution/wordsalad/check:
     post:
       tags:
-      - task
+      - solution
       summary: Check wordsalad soulution
       operationId: checkWordsaladSolution
       security:
@@ -826,7 +870,7 @@ paths:
   /solution/image/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all image soulution from task id
       operationId: getImageSolution
       security:  
@@ -874,7 +918,7 @@ paths:
   /solution/image/check:
     post:
       tags:
-      - task
+      - solution
       summary: Check image soulution
       security:
       - JWT: [write]
@@ -925,7 +969,7 @@ paths:
   /solution/topic_connection/{task_id}:
     get:
       tags:
-      - task
+      - solution
       summary: Get all topic connection soulution from task id
       operationId: getTopicConnectionSolution
       security:  
@@ -986,7 +1030,7 @@ paths:
   /solution/topic_connection/check:
     post:
       tags:
-      - task
+      - solution
       summary: check topic connection soulution
       operationId: checkTopicConnectionSolution
       security:
@@ -1039,7 +1083,7 @@ paths:
   /subject:
     post:
       tags:
-      - task
+      - subject
       summary: Create a subject
       operationId: createSubject
       security:
@@ -1084,7 +1128,7 @@ paths:
                     type: string
     get:
       tags:
-      - task
+      - subject
       summary: Get all subjects
       operationId: getSubjects
       security:
@@ -1102,18 +1146,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subjects :
-                    type: array
-                    items:
-                      type: string
-                    example:
-                      - Mathe
-                      - Englisch
-                      - Deutsch
-                      - Informatik
-          
+                type: array
+                items:
+                  properties:
+                    subjectId :
+                      type : integer
+                    displayName:
+                        type: string
+                        example:
+                          subject
         
         '4XX':
           description: User Error
@@ -1138,8 +1179,8 @@ paths:
   /subject/{displayName}:
     get:
       tags:
-      - task
-      summary: Get subject WIP
+      - subject
+      summary: Get subject 
       operationId: getSubject
       security:
       - JWT: [read]
@@ -1157,18 +1198,19 @@ paths:
             type: string
       responses:
         '200':
-          description: WIP Ok
+          description: Ok
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  subject :
-                    type: object
-                    properties:
-                      WIP :
-                        type : string
-                        description : WIP
+                  subjectId:
+                    type: integer
+                  displayName:
+                    type: string
+                    example:
+                      Deutsch
+
                         
         '4XX':
           description: User Error
@@ -1193,7 +1235,7 @@ paths:
   /module:
     post:
       tags:
-      - task
+      - module
       summary: Create module
       operationId: createModule
       security:
@@ -1241,7 +1283,7 @@ paths:
                     
     get:
       tags:
-      - task
+      - module
       summary: Get all modules
       operationId: getModules
       security:
@@ -1256,11 +1298,26 @@ paths:
       responses:
         '200':
           description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    moduleId:
+                      type: integer
+                      example: 7
+                    displayName:
+                      type: string
+                      example: Geometrie
+                    subjectId:
+                      type: integer
           
   /module/{displayName}:
     get:
       tags:
-      - task
+      - module
       summary: Get module WIP
       operationId: getModule
       security:
@@ -1279,17 +1336,20 @@ paths:
             type: string
       responses:
         '200':
-          description: Ok WIP
+          description: Ok
           content:
             application/json:
               schema:
-                  type: object
-                  properties:
-                    lecture:
-                      type: object
-                      properties:
-                        WIP: 
-                          type : string
+                type: object
+                properties:
+                  moduleId:
+                    type: integer
+                    example: 7
+                  displayName:
+                    type: string
+                    example: Geometrie
+                  subjectId:
+                    type: integer
         
         '4XX':
           description: User Error
@@ -1314,7 +1374,7 @@ paths:
   /subject/{subjectDisplayName}/module:
     get:
       tags:
-      - task
+      - subject
       summary: Get modules from subject
       operationId: getModulesFromSubject
       security:
@@ -1339,14 +1399,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  modules:
-                    type: array
-                    items:
-                      type: string
+                  moduleId:
+                    type: integer
                     example:
-                    - Geometrie
-                    - Algebra
-        
+                      4
+                  subjectId:
+                    type: integer
+                    example:
+                      12
+                  displayName: 
+                    type: string
+                    example:
+                      Gramatik
         '4XX':
           description: User Error
           content:
@@ -1370,7 +1434,7 @@ paths:
   /lecture:
     post:
       tags:
-      - task
+      - lecture
       summary: Create lecture
       operationId: createLecture
       security:
@@ -1398,7 +1462,7 @@ paths:
           
     get:
       tags:
-      - task
+      - lecture
       summary: Get all lectures
       operationId: getLectures
       security:
@@ -1416,12 +1480,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  lectures:
-                    type: array
-                    items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    lectureId:
+                      type: integer
+                      example : 2
+                    displayName:
                       type: string
+                      example: Dreiecke
+                    moduleId:
+                      type: integer
+                      example:
+                        2
         
         '4XX':
           description: User Error
@@ -1446,7 +1518,7 @@ paths:
   /lecture/{displayName}:
     get:
       tags:
-      - task
+      - lecture
       summary: Get lecture WIP
       operationId: getLecture
       security:
@@ -1465,17 +1537,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Ok WIP
+          description: Ok
           content:
             application/json:
               schema:
-                  type: object
-                  properties:
-                    lecture:
-                      type: object
-                      properties:
-                        WIP: 
-                          type : string
+                type: object
+                properties:
+                  lectureId:
+                    type: integer
+                    example : 2
+                  displayName:
+                    type: string
+                    example: Dreiecke
+                  moduleId:
+                    type: integer
+                    example:
+                      13
+                          
         
         '4XX':
           description: User Error
@@ -1500,7 +1578,7 @@ paths:
   /module/{moduleDisplayName}/lecture:
     get:
       tags:
-      - task
+      - module
       summary: Get lectures from module
       operationId: getLecturesFromModule
       security:
@@ -1523,12 +1601,99 @@ paths:
           content:
             application/json:
               schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    lectureId:
+                      type: integer
+                      example:
+                        2
+                    displayName:
+                      type: string
+                      example:
+                        Dreiecke
+                    moduleId:
+                      type: integer
+                      example:
+                        5
+
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  lectures:
-                    type: array
-                    items:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+  
+  /difficulty:
+    post:
+      tags:
+      - difficulty
+      summary: Create difficulty
+      operationId: createDifficulty
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          
+    get:
+      tags:
+      - difficulty
+      summary: Get all difficultys
+      operationId: getDifficultys
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    displayName:
                       type: string
+                    difficultyId:
+                      type: integer
+
         
         '4XX':
           description: User Error
@@ -1549,7 +1714,67 @@ paths:
                 properties:
                   error :
                     type: string
+  
+  /difficulty/{displayName}:
+    get:
+      tags:
+      - difficulty
+      summary: Get difficulty
+      operationId: getDifficulty
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name : displayName
+        in : path
+        required : true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  displayName:
+                    type: string
+                    example:
+                      hard
+                  difficultyId:
+                    type : integer
+                    example:
+                      1    
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error :
+                    type: string
+      
 
+
+      
 components:
   securitySchemes:
     JWT:

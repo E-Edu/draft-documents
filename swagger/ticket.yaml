@@ -3,8 +3,8 @@ info:
   title: Ticket Microservice
   version: '1'
 servers:
-- url: http://localhost:5000 
-- url: https://localhost:5000 
+- url: http://localhost:80
+- url: https://localhost:80 
 tags:
 - name: ticket
   description: Ticket Microservice
