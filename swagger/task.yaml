@@ -320,7 +320,7 @@ paths:
                     type: string
   
   
-  /task/{task_id}/next:
+  /task/{last_task_id}/next:
     get:
       tags:
       - task
