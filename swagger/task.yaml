@@ -67,20 +67,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
     get:
       tags:
@@ -138,20 +132,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /task/{task_id}:
@@ -191,20 +179,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - task 
@@ -236,20 +218,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
+                $ref: '#/components/schemas/Error'
+
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
     put:
       tags:
       - task
@@ -298,22 +274,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
-  /task/{task_id}/verify:
+  /task/verify:
     patch:
       tags:
       - task
@@ -328,14 +298,6 @@ paths:
           required: true
           schema:
             type: string
-        - name: task_id
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
             
       responses:
         '200':
@@ -350,20 +312,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
   /task/{last_task_id}/next:
     post:
@@ -416,20 +372,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
   /task/my:
     get:
@@ -461,20 +411,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/mutiple_choice/{task_id}:
@@ -518,20 +462,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/mutiple_choice/check:
@@ -571,20 +509,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/freestyle/{task_id}:
@@ -619,20 +551,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/freestyle/check:
@@ -670,21 +596,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-
+                $ref: '#/components/schemas/Error'
 
   /solution/equations/{task_id}:
     get:
@@ -718,20 +637,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
+                $ref: '#/components/schemas/Error'
+
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/equations/check:
@@ -769,20 +682,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-        
+                $ref: '#/components/schemas/Error'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/wordsalad/{task_id}:
@@ -824,20 +730,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
   /solution/wordsalad/check:
@@ -875,20 +775,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
 
 
@@ -924,20 +818,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
                     
                     
   /solution/image/check:
@@ -974,20 +862,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
                     
 
 
@@ -1036,20 +918,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
                     
                     
   /solution/topic_connection/check:
@@ -1090,20 +966,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
   /subject:
     post:
@@ -1137,20 +1007,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
     get:
       tags:
       - subject
@@ -1180,20 +1044,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
           
   /subject/{display_name}:
     get:
@@ -1229,20 +1087,50 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - subject
+      summary: delete subject 
+      operationId: deleteSubject
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: display_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+                        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
                     
   /module:
     post:
@@ -1278,20 +1166,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
                     
     get:
       tags:
@@ -1350,20 +1232,52 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - module
+      summary: Delete Module
+      operationId: deleteModule
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: display_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+        
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    
                     
   /subject/{subject_display_name}/module:
     get:
@@ -1398,20 +1312,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
                     
   /lecture:
     post:
@@ -1441,6 +1349,20 @@ paths:
       responses:
         '200':
           description: Ok
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                    
           
     get:
       tags:
@@ -1471,20 +1393,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
 
   /lecture/{display_name}:
     get:
@@ -1520,20 +1436,51 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - lecture
+      summary: Delete Lecture
+      operationId: deleteLecture
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: display_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+                  
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
                     
   /module/{module_display_name}/lecture:
     get:
@@ -1570,20 +1517,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
   
   /difficulty:
     post:
@@ -1611,6 +1552,19 @@ paths:
       responses:
         '200':
           description: Ok
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
           
     get:
       tags:
@@ -1642,20 +1596,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
   
   /difficulty/{display_name}:
     get:
@@ -1690,21 +1638,50 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-      
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - difficulty
+      summary: Delete difficulty
+      operationId: deleteDifficulty
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name : display_name
+        in : path
+        required : true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'    
 
 
 components:
@@ -1790,3 +1767,47 @@ components:
         display_name:
           type: string
           example: Schwer
+    
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2020-03-22T14:52:51.714+0000
+        status:
+          type: string
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        message:
+          type: string
+        path:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              codes:
+                type: array
+                items:
+                  type: string
+              arguments:
+                type: array
+                items:
+                  additionalProperties:
+                    type:
+                      string
+              default_message:
+                type: string
+              object_name:
+                type: string
+              field:
+                type: string
+              rejected_value:
+                type: string
+              binding_failure:
+                type: boolean
+              code:
+                type: string
