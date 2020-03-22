@@ -3,8 +3,9 @@ info:
   title: User Microservice
   version: v1
 servers:
+- url: https://user.e-edu.the-morpheus.de
 - url: http://localhost:80
-- url: https://localhost:80
+
 tags:
 - name: user
   description: User Microservice

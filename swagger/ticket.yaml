@@ -1,10 +1,10 @@
 openapi: '3.0.2'
 info:
   title: Ticket Microservice
-  version: '1'
+  version: 'v1'
 servers:
+- url: https://report.e-edu.the-morpheus.de
 - url: http://localhost:80
-- url: https://localhost:80 
 tags:
 - name: ticket
   description: Ticket Microservice
@@ -12,6 +12,8 @@ paths:
   /ticket:
     post:
       summary: Creates a new ticket
+      tags: 
+        - ticket
       security: 
         - JWT: [write]
         - ServiceToken: [write]
@@ -53,6 +55,8 @@ paths:
   /ticket/{ticket_id}:
     delete:
       summary : Deletes a ticket
+      tags: 
+        - ticket
       security:
         - JWT: [write]
         - ServiceToken: [write]
@@ -87,6 +91,8 @@ paths:
   /ticket/list:
     post:
       summary: Returns a list of all available tickets
+      tags: 
+        - ticket
       security:
         - JWT: [read]
         - ServiceToken: [write]
@@ -134,6 +140,8 @@ paths:
   /ticket/{ticket_id}/edit:
     put:
       summary : Changes a speifc tickets title and body.
+      tags: 
+        - ticket
       security:
         - JWT: [write]
         - ServiceToken: [write]
@@ -179,6 +187,8 @@ paths:
   /ticket/{ticket_id}/answer:
      put:
       summary : Mark as troll
+      tags: 
+        - ticket
       security:
         - JWT: [write]
         - ServiceToken: [write]
