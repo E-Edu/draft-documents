@@ -134,6 +134,7 @@ paths:
       - ServiceToken: [write]
       responses:
         200:
+          description: Ok
           content:
             application/json:
               schema: 
@@ -312,22 +313,17 @@ paths:
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
         400:
           description: Returns *INVALID_LOGIN* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
-              schema: 
                 schema: 
                   $ref: '#/components/schemas/Error'
 
