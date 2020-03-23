@@ -6,12 +6,10 @@
 
 ### Swagger Documentation
 
-To view the swagger documentation in a better format, copy paste the following yamls into the [Swagger Editor](https://editor.swagger.io/) 
-
 #### YAML 
-- [User](swagger/user.yaml) 
-- [Task](swagger/task.yaml) 
-- [Ticket](swagger/ticket.yaml)
+- [User](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/user.yaml) 
+- [Task](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/task.yaml) 
+- [Ticket](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/ticket.yaml)
 
 ---
 

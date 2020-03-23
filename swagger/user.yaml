@@ -34,36 +34,38 @@ paths:
               properties:
                 email:
                   type: string
+                  example: hans.peter.lustig@gmail.com
                 password:
                   type: string
+                  example: IchMagEinhörner1234
                 first_name:
                   type: string
+                  example: Hans-Peter
                 last_name:
                   type: string
+                  example: Lustig
                 teacher_token:
                   type: string
-                  description: If there is no teacher token it will send a empty string
+              required:
+              - email
+              - password
+              - first_name
+              - last_name
       responses:
-        200:
+        201:
           description: After processing this request a email will be dispatched to the users email address, containing a link for verifying their account structured in the following way **https://DOMAIN.TLD/verify?token=$TOKEN**. In case the teacher token isn't *null* and valid the teacher is instantly verified and marked as teacher.
         400:
           description: Returns *USER_ALREADY_REGISTERED* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string  
+                $ref: '#/components/schemas/Error'  
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                $ref: '#/components/schemas/Error'
     
     put:
       tags:
@@ -83,23 +85,11 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                session:
-                  type: string
-                user:
-                  type: string
-                teacher:
-                  type: boolean
-                admin:
-                  type: boolean
-                priviliged_student:
-                  type: boolean
-                report_spammer:
-                  type: boolean
+              $ref: '#/components/schemas/User'
       responses:
         200:
           description: Ok
+
         400:
           description: Returns *INVALID_SESSION* as error string
           content:
@@ -114,19 +104,13 @@ paths:
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string              
+                $ref: '#/components/schemas/Error'            
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                $ref: '#/components/schemas/Error'
 
   /user/{user_guid}:
     get:
@@ -150,20 +134,10 @@ paths:
       - ServiceToken: [write]
       responses:
         200:
-          description: The response will return privilege flags of the requested User in case the verification was successful and a error *String* in case a **Error** ocurred. **report_spammer** will always return 0 unless the session owner has the correct rights.
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  teacher: 
-                    type: boolean
-                  admin: 
-                    type: boolean
-                  priviliged_student: 
-                    type: boolean
-                  report_spammer: 
-                    type: integer
+                $ref: '#/components/schemas/User'
         400:
           description: Returns *INVALID_SESSION* as error string
           content:
@@ -178,19 +152,13 @@ paths:
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                $ref: '#/components/schemas/Error'
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string  
+                $ref: '#/components/schemas/Error' 
   
   /user/{user_guid}/ban:
     post:
@@ -199,7 +167,7 @@ paths:
       summary: Bans an User
       operationId: ban_user
       security:
-        - ServiceToken: [read]
+        - ServiceToken: [write]
       parameters:
         - name: Authorization
           in: header
@@ -221,29 +189,28 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
+                $ref: '#/components/schemas/Error'
         
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error :
-                    type: string
-                    
-
-                    
+                $ref: '#/components/schemas/Error'  
 
   /user/verify:
     patch:
       tags:
         - user
+      security:
+        - ServiceToken : [read, write]
       summary: Verifies an email token
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
       operationId: verify
       requestBody:
         content:
@@ -268,29 +235,23 @@ paths:
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                $ref: '#/components/schemas/Error'
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
-                    
+                $ref: '#/components/schemas/Error'
+
   /user/session:
     post:
       tags:
         - user
-      summary: Checks whether a session is valid or not
+      summary: Checks whether a session jwt token is valid or not
       operationId: session
       security: 
       - JWT : [read]
-      - ServiceToken: [write]
+      - ServiceToken: [read, write]
       parameters:
         - name: Authorization
           in: header
@@ -313,25 +274,27 @@ paths:
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                $ref: '#/components/schemas/Error'
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string    
-
+                $ref: '#/components/schemas/Error'
   /user/login:
     post:
       tags:
         - user
+      security:
+        - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
       summary: Used to login a user
+      description: Returns jwt session
       operationId: login
       requestBody:
         content:
@@ -351,8 +314,7 @@ paths:
               schema: 
                 type: object
                 properties: 
-                  session: 
-                    type: string
+                  $ref: '#/components/schemas/Error'
         400:
           description: Returns *INVALID_LOGIN* as error string
           content:
@@ -360,17 +322,14 @@ paths:
               schema: 
                 type: object
                 properties: 
-                  error: 
-                    type: string
+                  $ref: '#/components/schemas/Error'
         503:
           description: Returns *DATABASE_ERROR* as error string
           content:
             application/json:
               schema: 
-                type: object
-                properties: 
-                  error: 
-                    type: string
+                schema: 
+                  $ref: '#/components/schemas/Error'
 
 components:
   securitySchemes:
@@ -381,3 +340,41 @@ components:
       type: http
       scheme: bearer
       bearerFormat: randomstring
+  schemas:
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: Hans-Peter
+        last_name:
+          type: string
+          example: Lustig
+        created_at:
+          type: string
+          description: Time when the user created the Account.
+          example: 2020-03-22T20:26:47.367+0000
+        email:
+          type: string
+          example: hans.peter.lustig@gmail.com
+        role:
+          type: integer
+          description:
+            User is 0,
+            Teacher is 1,
+            Admin is 2,
+            priviliged_student is 3
+          example: 0
+        status:
+          type: integer
+          description:
+            Unverified is 0,
+            Verified is 1,
+            Reported is 2,
+            Banned is 3
+          example: 1
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
