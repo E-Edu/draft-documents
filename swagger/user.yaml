@@ -69,7 +69,6 @@ paths:
       tags:
         - user
       summary: Set user info
-      description: The specified user if not null (then the owner of the session) will have their flags altered, if the owner of the session has the right permission. A user can NEVER alter their own report_spammer!
       operationId: set_user
       parameters:
         - name: Authorization
@@ -134,7 +133,6 @@ paths:
       tags:
         - user
       summary: Gets user info.
-      description: If **user** is set to *null* information about the owner of the Session is returned, otherwise information of the requested **user** is provided, if the session owner has the right permission to request them.
       operationId: get_user
       parameters:
         - name: Authorization
