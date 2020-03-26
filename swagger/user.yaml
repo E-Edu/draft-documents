@@ -15,14 +15,14 @@ paths:
       tags:
         - user
       summary: Creates a new user
-      description: Notice that Passwords should be stored by being hashed with BCrypt.
+      description: Notice that Passwords should be stored by being hashed with BCrypt. If the teacher token is undefined, created user will be a **student**!
       operationId: create_user
       security: 
-      - JWT : [write]
       - ServiceToken: [write]
       parameters:
         - name: Authorization
           in: header
+          description: Secret communication key
           required: true
           schema:
             type: string
@@ -45,6 +45,7 @@ paths:
                   type: string
                   example: Lustig
                 teacher_token:
+                  description: Optional
                   type: string
               required:
               - email
@@ -78,14 +79,45 @@ paths:
           required: true
           schema:
             type: string
+          description: Secret communication key
+        - name: user_guid
+          in: header
+          required: true
+          schema:
+            type: string  
       security: 
-      - JWT : [write]
       - ServiceToken: [write]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: Hans-Peter
+                last_name:
+                  type: string
+                  example: Lustig
+                email:
+                  type: string
+                  example: hans.peter.lustig@gmail.com
+                role:
+                  type: integer
+                  description:
+                    User is 0,
+                    Teacher is 1,
+                    Admin is 2,
+                    priviliged_student is 3
+                  example: 0
+                status:
+                  type: integer
+                  description:
+                    Unverified is 0,
+                    Verified is 1,
+                    Reported is 2,
+                    Banned is 3
+                  example: 1
       responses:
         200:
           description: Ok
@@ -124,14 +156,14 @@ paths:
           required: true
           schema:
             type: string
+          description: Secret communication key
         - name: user_guid
           in : path
           required: true
           schema:
             type: string
       security: 
-      - JWT : [read]
-      - ServiceToken: [write]
+      - ServiceToken: [read]
       responses:
         200:
           description: Ok
@@ -175,16 +207,26 @@ paths:
           required: true
           schema:
             type: string
+          description: Secret communication key
         - name: user_guid
           in : path
           required: true
           schema:
             type: string
-      
+        - name: role
+          in : header
+          required: true
+          schema:
+            type: integer      
       responses:
         '200':
           description: Ok
-      
+        '409':
+          description: Already banned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '4XX':
           description: User Error
           content:
@@ -224,13 +266,6 @@ paths:
       responses:
         200:
           description: Ok
-          content:
-            application/json:
-              schema: 
-                type: object
-                properties: 
-                  session: 
-                    type: string
         401:
           description: Returns *INVALID_TOKEN* as error string
           content:
@@ -244,44 +279,7 @@ paths:
               schema: 
                 $ref: '#/components/schemas/Error'
 
-  /user/session:
-    post:
-      tags:
-        - user
-      summary: Checks whether a session jwt token is valid or not
-      operationId: session
-      security: 
-      - JWT : [read]
-      - ServiceToken: [read, write]
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema: 
-              type: object
-              properties:
-                session:
-                  type: string
-      responses:
-        200:
-          description: Ok
-        401:
-          description: Returns *INVALID_SESSION* as error string
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Error'
-        503:
-          description: Returns *DATABASE_ERROR* as error string
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Error'
+  
   /user/login:
     post:
       tags:
@@ -313,7 +311,11 @@ paths:
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/Error'
+                type: object
+                properties:
+                  session:
+                    type: string
+                    
         400:
           description: Returns *INVALID_LOGIN* as error string
           content:
@@ -329,9 +331,6 @@ paths:
 
 components:
   securitySchemes:
-    JWT:
-      type: http
-      scheme: bearer
     ServiceToken:
       type: http
       scheme: bearer
