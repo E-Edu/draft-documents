@@ -89,7 +89,7 @@ paths:
     
   
   /ticket/list:
-    post:
+    get:
       summary: Returns a list of all available tickets
       tags: 
         - ticket
