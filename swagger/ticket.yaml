@@ -18,10 +18,14 @@ paths:
       tags: 
         - ticket
       security: 
-        - JWT: [write]
         - ServiceToken: [write]
       parameters:
       - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Role
         in: header
         required: true
         schema:
@@ -64,10 +68,14 @@ paths:
       tags: 
         - ticket
       security:
-        - JWT: [write]
         - ServiceToken: [write]
       parameters:
         - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Role
           in: header
           required: true
           schema:
@@ -107,6 +115,11 @@ paths:
         - ServiceToken: [write]
       parameters:
         - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Role
           in: header
           required: true
           schema:
@@ -155,10 +168,14 @@ paths:
       tags: 
         - ticket
       security:
-        - JWT: [write]
         - ServiceToken: [write]
       parameters:
         - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Role
           in: header
           required: true
           schema:
@@ -205,10 +222,14 @@ paths:
       tags: 
         - ticket
       security:
-        - JWT: [write]
         - ServiceToken: [write]
       parameters:
         - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Role
           in: header
           required: true
           schema:
