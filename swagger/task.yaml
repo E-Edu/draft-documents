@@ -1,3 +1,4 @@
+
 openapi: 3.0.1
 info:
   title: Task Microservice WIP
@@ -448,6 +449,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /solution/multple_choice/:
+    post:
+      tags:
+      - solution
+      summary:  Creates a new Multiple Chohice Solution
+      operationId: createMultipleChoiceSolution
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: task_id
+          in: header
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      requestBody:
+        content:
+          applicaton/json:
+            schema:
+              type: object
+              properties:
+              
+                solution:
+                  type: string
+                  example: 
+                  - Lösung 1
+                  - Lösung 2
+                is_True:
+                  type: boolean
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  solution: 
+                    type: string
+                  is_True:
+                    type: boolean
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+
 
   /solution/mutiple_choice/{task_id}:
     get:
@@ -489,13 +552,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
 
 
   /solution/mutiple_choice/check:
@@ -533,13 +596,55 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
+  
+  /solution/multiple_choice/{Task_id}/{Solution}:
+    delete:
+      tags:
+      - solution
+      summary: Deletes a Multiple Choice Solution
+      operationId: deleteMultipleChoiceSolutions
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Task_id
+          in: path
+          required: true 
+          schema:
+            type: integer
+        - name: Solution
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+
 
 
   /solution/freestyle/{task_id}:
@@ -573,13 +678,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
 
 
   /solution/freestyle/check:
@@ -615,13 +720,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
 
   /solution/equations/{task_id}:
     get:
@@ -654,14 +759,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
 
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
 
 
   /solution/equations/check:
@@ -697,13 +802,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
+  
+  /solution/wordsalad/:
+    post:
+      tags:
+      - solution
+      summary:  Creates a new Wordsalad Solution
+      operationId: createWordsaladSolution
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: task_id
+          in: header
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      requestBody:
+        content:
+          applicaton/json:
+            schema:
+              type: object
+              properties:
+                solution:
+                  type: string
+
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  solution: 
+                    type: string
+                  is_True:
+                    type: boolean
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
 
 
   /solution/wordsalad/{task_id}:
@@ -744,13 +906,106 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
+      
+      
+    put:
+      tags:
+      - solution
+      summary: Edits a Wordsalad Solution
+      operationId: editWordsaladSolution
+      security:
+      - JWT: [read]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: The unique task id
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_Solution:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties:
+                  new_Solution:
+                    type: string
+
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+
+
+    delete:
+      tags:
+      - solution
+      summary: Deletes a Wordsalad solution
+      operationId: deleteWordsaladSolutions
+      security:
+      - JWT: [write]
+      - ServiceToken : [read, write]
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true 
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok
+        '4XX':
+          description: User Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '5XX':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+
+
 
 
   /solution/wordsalad/check:
@@ -786,13 +1041,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
         '5XX':
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Solution'
+
+
+
 
 
 
@@ -1876,6 +2134,16 @@ components:
         display_name:
           type: string
           example: Schwer
+    
+    Solution:
+      type: object
+      properties:
+        error:
+          type: string
+          example: FORBIDDEN
+        extra:
+          type: string
+
     Error:
       oneOf:
         - $ref: '#/components/schemas/InternalError'

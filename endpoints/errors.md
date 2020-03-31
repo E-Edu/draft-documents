@@ -13,6 +13,9 @@
 | INVALID_SESSION         | The Session ID given was invalid or could not be resolved            |
 | INVALID_TASK            | The Task ID given could not be resolved                              |
 | MISSING_DATA            | The request was missing data that is required                        |
+| FORBIDDEN               | The User requesting does not have enough permission                  |
+| WRONG_ANSWER            | The answer a User enterd was wrong                                   |
+
 
 ---
 
