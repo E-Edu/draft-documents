@@ -453,8 +453,8 @@ paths:
     post:
       tags:
       - solution
-      summary:  Creates a new Multiple Chohice Solution
-      operationId: createMultipleChoiceSolution
+      summary:  Creates a new multiple Chohice Solution
+      operationId: createmultipleChoiceSolution
       security:
       - JWT: [write]
       - ServiceToken : [read, write]
@@ -484,7 +484,7 @@ paths:
                   example: 
                   - Lösung 1
                   - Lösung 2
-                is_True:
+                is_correct:
                   type: boolean
       responses:
         200:
@@ -496,8 +496,12 @@ paths:
                 properties: 
                   solution: 
                     type: string
-                  is_True:
+                  is_correct:
                     type: boolean
+                  task_id:
+                    type: integer
+                    format: int64
+                    minimum: 0
         '4XX':
           description: User Error
           content:
@@ -565,10 +569,10 @@ paths:
     post:
       tags:
       - solution
-      summary: Check multiple choice soulutions
+      summary: Check multiple Choice soulutions
       operationId: checkMultipleChoiceSolutions
       security:
-      - JWT: [write]
+      - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
         - name: Authorization
@@ -584,7 +588,7 @@ paths:
               properties:
                 task_id:
                   type: integer
-                user_solutions:
+                solution:
                   type: array
                   items :
                     type : string
@@ -608,7 +612,7 @@ paths:
     delete:
       tags:
       - solution
-      summary: Deletes a Multiple Choice Solution
+      summary: Deletes a multiple Choice Solution
       operationId: deleteMultipleChoiceSolutions
       security:
       - JWT: [write]
@@ -814,7 +818,7 @@ paths:
     post:
       tags:
       - solution
-      summary:  Creates a new Wordsalad Solution
+      summary:  Creates a new wordsalad Solution
       operationId: createWordsaladSolution
       security:
       - JWT: [write]
@@ -852,7 +856,7 @@ paths:
                 properties: 
                   solution: 
                     type: string
-                  is_True:
+                  is_correct:
                     type: boolean
         '4XX':
           description: User Error
@@ -918,7 +922,7 @@ paths:
     put:
       tags:
       - solution
-      summary: Edits a Wordsalad Solution
+      summary: Edits a wordsalad Solution
       operationId: editWordsaladSolution
       security:
       - JWT: [read]
@@ -943,7 +947,7 @@ paths:
             schema:
               type: object
               properties:
-                new_Solution:
+                solution:
                   type: string
       responses:
         '200':
@@ -953,7 +957,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  new_Solution:
+                  solution:
                     type: string
 
         '4XX':
@@ -1031,7 +1035,7 @@ paths:
               properties:
                 task_id:
                   type: integer
-                user_solution:
+                solution:
                   type: string
       responses:
         '200':
