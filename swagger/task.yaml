@@ -464,21 +464,14 @@ paths:
           required: true
           schema:
             type: string
-        - name: task_id
-          in: header
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
       requestBody:
         content:
           applicaton/json:
             schema:
               type: object
               properties:
-              
+                task_id:
+                  type: integer
                 solution:
                   type: string
                   example: 
@@ -531,14 +524,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: task_id
-          in: path
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
+        
       responses:
         '200':
           description: Ok
@@ -547,6 +533,8 @@ paths:
               schema:
                 type: object
                 properties:
+                  task_id:
+                    type: integer
                   solutions:
                     type: array
                     items:
@@ -829,20 +817,14 @@ paths:
           required: true
           schema:
             type: string
-        - name: task_id
-          in: header
-          required: true
-          description: The unique task id
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
       requestBody:
         content:
           applicaton/json:
             schema:
               type: object
               properties:
+                task_id:
+                  type: integer
                 solution:
                   type: string
 
