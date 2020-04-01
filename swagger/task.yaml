@@ -524,6 +524,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
         
       responses:
         '200':
@@ -533,8 +538,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  task_id:
-                    type: integer
                   solutions:
                     type: array
                     items:
