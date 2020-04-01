@@ -10,6 +10,7 @@
 - [User](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/user.yaml) 
 - [Task](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/task.yaml) 
 - [Ticket](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/ticket.yaml)
+- [Pub/Sub](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/microservice_com.yaml)
 
 ---
 
