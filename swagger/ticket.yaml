@@ -12,9 +12,6 @@ paths:
   /ticket:
     post:
       summary: Creates a new ticket
-      responses:
-        '200':
-          description: OK
       tags: 
         - ticket
       security: 
