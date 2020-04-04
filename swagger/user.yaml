@@ -185,14 +185,14 @@ paths:
         '200':
           description: Ok
       
-        '4XX':
+        '400':
           description: User Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         
-        '5XX':
+        '500':
           description: Server Error
           content:
             application/json:
