@@ -21,7 +21,7 @@ paths:
       - JWT : [write]
       - ServiceToken: [write]
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: true
           schema:
@@ -73,7 +73,7 @@ paths:
       summary: Set user info
       operationId: set_user
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: true
           schema:
@@ -119,7 +119,7 @@ paths:
       summary: Gets user info.
       operationId: get_user
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: true
           schema:
@@ -170,7 +170,7 @@ paths:
       security:
         - ServiceToken: [write]
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: true
           schema:
@@ -207,7 +207,7 @@ paths:
         - ServiceToken : [read, write]
       summary: Verifies an email token
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: false
           schema:
@@ -254,7 +254,7 @@ paths:
       - JWT : [read]
       - ServiceToken: [read, write]
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: true
           schema:
@@ -289,7 +289,7 @@ paths:
       security:
         - ServiceToken : [read, write]
       parameters:
-        - name: Authorization
+        - name: X-Forwarded-User
           in: header
           required: false
           schema:
