@@ -140,14 +140,187 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-
 components:
   securitySchemes:
     ServiceToken:
       type: http
       scheme: bearer
       bearerFormat: randomstring
-
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    MethodNotAllowed:
+      description: Method not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAcceptable:
+      description: Not acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RequestTimeout:
+      description: Request timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Gone:
+      description: Gone
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LengthRequiered:
+      description: Length requiered
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    PreconditionFailed:
+      description: Precondition failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    PayloadTooLarge:
+      description: Payload too large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RequestURITooLong:
+      description: Request-URI too long
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RequestRangeNotSatisfiable:
+      description: Request range not satisfiable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ExpectationFailed:
+      description: Expectation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Unprocessable entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Locked:
+      description: Locked
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NoResponse:
+      description: No response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotImplemented:
+      description: Not implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadGateway:
+      description: BadGateway
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Insufficient Storage:
+      description: Insufficient Storage
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LoopDetected:
+      description: Loop detected
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BandwidthLimitExceeded:
+      description: Bandwidth limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotExtended:
+      description: Not extended
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NetworkAuthenticationRequired:
+      description: Network authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NetworkConnectTimeoutError:
+      description: Network connect timeout error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       oneOf:
