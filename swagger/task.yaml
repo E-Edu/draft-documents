@@ -32,7 +32,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -85,7 +89,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -148,7 +156,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -189,7 +201,11 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -227,7 +243,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -284,7 +304,11 @@ paths:
       - JWT: [write]
       - ServiceToken: [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -336,7 +360,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -373,7 +401,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -422,7 +454,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -459,7 +495,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -519,7 +559,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -566,7 +610,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -609,7 +657,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -652,7 +704,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -692,7 +748,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -733,7 +793,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -774,7 +838,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -815,7 +883,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -867,7 +939,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -913,7 +989,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -968,7 +1048,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1007,7 +1091,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1053,7 +1141,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1090,7 +1182,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1132,7 +1228,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1183,7 +1283,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1228,7 +1332,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1265,7 +1373,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1301,7 +1413,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1340,7 +1456,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1375,7 +1495,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1414,7 +1538,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1438,7 +1566,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1476,7 +1608,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1512,7 +1648,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1552,7 +1692,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1591,7 +1735,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1628,7 +1776,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1666,7 +1818,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1702,7 +1858,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1744,7 +1904,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1781,7 +1945,11 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1818,7 +1986,7 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-      - name: X-Forwarded-User
+      - name: Authentication
         in: header
         required: true
         schema:
@@ -1856,7 +2024,7 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-      - name: X-Forwarded-User
+      - name: Authentication
         in: header
         required: true
         schema:
@@ -1892,7 +2060,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1929,7 +2101,11 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-        - name: X-Forwarded-User
+        - name: Authentication
+          in: header
+          schema:
+            type: string
+        - name: X-ServiceToken
           in: header
           required: true
           schema:
@@ -1965,7 +2141,7 @@ paths:
       - JWT: [read]
       - ServiceToken : [read, write]
       parameters:
-      - name: X-Forwarded-User
+      - name: Authentication
         in: header
         required: true
         schema:
@@ -2003,7 +2179,7 @@ paths:
       - JWT: [write]
       - ServiceToken : [read, write]
       parameters:
-      - name: X-Forwarded-User
+      - name: Authentication
         in: header
         required: true
         schema:
@@ -2022,7 +2198,7 @@ paths:
                 $ref: '#/components/schemas/TaskType'  
 
         '400':
-          description: User Error
+          description: Internal Error
           content:
             application/json:
               schema:
