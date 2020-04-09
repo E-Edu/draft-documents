@@ -21,7 +21,7 @@ paths:
       - JWT : [write]
       - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -77,7 +77,7 @@ paths:
       summary: Set user info
       operationId: set_user
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -127,7 +127,7 @@ paths:
       summary: Gets user info.
       operationId: get_user
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -182,7 +182,7 @@ paths:
       security:
         - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -223,7 +223,7 @@ paths:
         - ServiceToken : [read, write]
       summary: Verifies an email token
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           required: false
           schema:
@@ -270,7 +270,7 @@ paths:
       - JWT : [read]
       - ServiceToken: [read, write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -309,7 +309,7 @@ paths:
       security:
         - ServiceToken : [read, write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           required: false
           schema:

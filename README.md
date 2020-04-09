@@ -17,5 +17,5 @@
 ### Endpoint Documentation 
 - [User](endpoints/user.md) **(Deprecated)**
 - [Task](endpoints/task.md) **(Deprecated)**
-- [Ticket](endpoints/ticket.md) **(Deprecated)**
+- [Report](endpoints/report.md) **(Deprecated)**
 - [Error Codes](endpoints/errors.md)

@@ -1,13 +1,13 @@
 openapi: '3.0.2'
 info:
-  title: Ticket Microservice
+  title: Report Microservice
   version: 'v1'
 servers:
 - url: https://report.e-edu.the-morpheus.de
 - url: http://localhost:80
 tags:
 - name: ticket
-  description: Ticket Microservice
+  description: Report Microservice
 paths:
   /ticket:
     post:
@@ -18,7 +18,12 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-      - name: Authentication
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-ServiceToken
         in: header
         required: true
         schema:
@@ -36,8 +41,19 @@ paths:
                   type: string
                 body:
                   type: string
-                ticket_type:
+                report_reason:
                   type: string
+                  enum:
+                    - TROLLING
+                    - FAULTY_TASK
+                    - SPELLING_MISTAKE
+                    - UNCLEAR
+                    - INCORECTLY_CORRECTED
+                    - DISCRIMINATING
+                    - POLITICALY_INCORRECT
+                    - BIASED
+                    - OTHER
+
     
       responses:
         '200':
@@ -64,7 +80,7 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -107,7 +123,7 @@ paths:
         - JWT: [read]
         - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -163,7 +179,7 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
@@ -217,7 +233,7 @@ paths:
         - JWT: [write]
         - ServiceToken: [write]
       parameters:
-        - name: Authentication
+        - name: Authorization
           in: header
           schema:
             type: string
