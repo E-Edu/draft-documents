@@ -19,7 +19,7 @@ Report:
 
 Task:
 - Neues Katalogisierungsschema:
-Subject->Lecture->Task_group->Task
+Subject->Lecture->Module->Task_group->Task
 - Anpassung an Milestone 1.0 von Task MS:
     - 1 Multiple Choice Aufgabe von erstellung bis Veröffentlichung
     - Erstellung durch Admin (Leher Support kommt später)
