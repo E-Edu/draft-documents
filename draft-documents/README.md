@@ -7,9 +7,9 @@
 ### Swagger Documentation
 
 #### YAML 
-- [User](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/user.yaml) 
-- [Task](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/task.yaml) 
-- [Ticket](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/ticket.yaml)
+- [User](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/draft-documents/swagger/user.yaml) 
+- [Task](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/draft-documents/swagger/task.yaml) 
+- [Ticket](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/draft-documents/swagger/report.yaml)
 - [Pub/Sub](https://editor.swagger.io/?url=https://raw.githubusercontent.com/E-Edu/draft-documents/master/swagger/microservice_com.yaml)
 
 ---
